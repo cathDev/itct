@@ -1,0 +1,93 @@
+
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+        <div class="dash-widget">
+          <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+          <div class="dash-widget-info text-right">
+            <h3>98</h3>
+            <span class="widget-title1">Tests <i class="fa fa-check" aria-hidden="true"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+        <div class="dash-widget">
+          <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+          <div class="dash-widget-info text-right">
+            <h3>72</h3>
+            <span class="widget-title3">Tâches <i class="fa fa-check" aria-hidden="true"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+        <div class="dash-widget">
+          <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+          <div class="dash-widget-info text-right">
+            <h3>618</h3>
+            <span class="widget-title4">Notification <i class="fa fa-check" aria-hidden="true"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="search-box">
+        <div class="input-group input-group-md" style="margin-left: 15px; background-color: #fafafa;">
+          <input type="text" class="form-control" placeholder="identifiant du patient" name="search" [(ngModel)]="search">
+          <span class="input-group-append">
+            <button class="btn" type="button" (click)="searchPatient()" [disabled]="search == ''"><i class="fa fa-search"></i></button>
+          </span>
+        </div>
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card-box shadow-sm p-3 mb-5 bg-white rounded">
+          <h4 class="card-title">Informations du test</h4>
+          <div class="row">
+            <div class="col-md-9">
+              <form action="#" >
+                <div class="form-group row">
+                  <div class="col-md-11">
+                    <input type="text" class="form-control rounded" placeholder="identifiant du patient">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-5">
+                    <input type="text" class="form-control rounded" placeholder="numéro du tube">
+                  </div>
+                  <div class="col-md-6 rounded">
+                    <select class="select rounded">
+                      <option>type de test</option>
+                      <option value="1">California</option>
+                      <option value="2">Texas</option>
+                      <option value="3">Florida</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-lg-11">
+                    <textarea rows="5" cols="5" class="form-control rounded" placeholder="Observations"></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-3" style="margin-top: 80px;">
+              <div class="text-right">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="checkbox" class="rounded"> Check me out
+                  </label>
+                </div>
+              </div><br/>
+              <div class="text-right col-md-12">
+                <button type="submit" class="btn btn-secondary" (click)="resetForm()">Annuler</button>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
