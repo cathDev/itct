@@ -31,12 +31,12 @@ export class ResourceService {
     };
   }
 
-  public getResourcesWithoutSecurity(url: string){
-    return this.http.get(this.host + url);
-  }
-
   public getResources(url: string){
     return this.http.get(this.host + url,this.getAuthenticationHeaders());
+  }
+
+  public getResourcesWithoutSecurity(url: string){
+    return this.http.get(this.host + url);
   }
 
   public getResourcesById(url: string, id:number){

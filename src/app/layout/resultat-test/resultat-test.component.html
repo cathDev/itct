@@ -2,39 +2,30 @@
 <div class="page-wrapper">
   <div class="content">
     <div class="row">
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
         <div class="dash-widget">
           <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
           <div class="dash-widget-info text-right">
-            <h3>1072</h3>
+            <h3>{{patients.length}}</h3>
             <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
         <div class="dash-widget">
           <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
           <div class="dash-widget-info text-right">
-            <h3>98</h3>
+            <h3>{{tests.length}}</h3>
             <span class="widget-title1">Tests <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
         <div class="dash-widget">
           <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
           <div class="dash-widget-info text-right">
             <h3>72</h3>
             <span class="widget-title3">Tâches <i class="fa fa-check" aria-hidden="true"></i></span>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-        <div class="dash-widget">
-          <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
-          <div class="dash-widget-info text-right">
-            <h3>618</h3>
-            <span class="widget-title4">Notification <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
@@ -56,25 +47,50 @@
           <form action="#">
             <div class="form-group row">
               <div class="col-md-11">
-                <input type="text" class="form-control rounded" placeholder="identifiant du patient">
+                <input type="text" class="form-control rounded" value="{{patient.identifiant}}" placeholder="identifiant du patient" readonly>
               </div>
             </div>
             <div class="form-group row">
-              <div class="col-md-5">
-                <input type="text" class="form-control rounded" placeholder="numéro du tube">
+              <label class="col-form-label col-md-2">IgG :</label>
+              <div class="col-md-10 row" style="margin-top: 6px;">
+                <div class="col-md-4">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="radio"> Positif
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="radio"> Négatif
+                    </label>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6 rounded">
-                <select class="select rounded">
-                  <option>type de test</option>
-                  <option value="1">California</option>
-                  <option value="2">Texas</option>
-                  <option value="3">Florida</option>
-                </select>
+            </div>
+            <div class="form-group row">
+              <label class="col-form-label col-md-2">IgM :</label>
+              <div class="col-md-10 row" style="margin-top: 6px;">
+                <div class="col-md-4">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="radio"> Positif
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="radio"> Négatif
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-lg-11">
-                <textarea rows="5" cols="5" class="form-control rounded" placeholder="Observations"></textarea>
+                <textarea rows="3" cols="5" class="form-control rounded" placeholder="Observations"></textarea>
               </div>
             </div>
             <div class="text-left">
@@ -106,7 +122,8 @@
               </div>-->
               <div class="account-logo">
                 <a href="index-2.html">
-                  <img alt="Cristina Groves" src="assets/img/doctor-thumb-03.jpg" class="img-fluid rounded-circle">
+                  <img alt="Cristina Groves" src="assets/img/user.jpg" class="img-fluid rounded-circle" *ngIf="imagePath == null">
+                  <img alt="Cristina Groves" [src]="imagePath" class="img-fluid rounded-circle" *ngIf="imagePath != null">
                 </a>
               </div>
             </div>
@@ -114,50 +131,28 @@
           <form action="#">
             <div class="form-group row">
               <div class="col-md-12">
-                <input type="text" class="form-control rounded" placeholder="Nom complet">
+                <input type="text" class="form-control rounded" value="{{patient.name}}" placeholder="Nom complet" readonly>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-md-6">
-                <input type="text" class="form-control rounded" placeholder="Sex">
+                <input type="text" class="form-control rounded" value="{{patient.sexe}}" placeholder="Sex" readonly>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control rounded" placeholder="Age">
+                <input type="text" class="form-control rounded" value="{{birthday}}" placeholder="Date de Naissance" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <input type="text" class="form-control rounded" value="{{patient.phone}}" placeholder="Télephone" readonly>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control rounded" value="{{patient.email}}" placeholder="Email" readonly>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-md-12">
-                <input type="text" class="form-control rounded" placeholder="Numéro du passeport">
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-md-6">
-                <select class="select rounded">
-                  <option selected disabled>Aéroport de départ</option>
-                  <option value="1">California</option>
-                  <option value="2">Texas</option>
-                  <option value="3">Florida</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <select class="select rounded">
-                  <option selected disabled>Destination</option>
-                  <option value="1">California</option>
-                  <option value="2">Texas</option>
-                  <option value="3">Florida</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-md-6">
-                <div class="cal-icon">
-                  <input type="text" class="form-control datetimepicker rounded" placeholder="Date de départ">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="cal-icon">
-                  <input type="text" class="form-control datetimepicker rounded" placeholder="Date d'arrivée">
-                </div>
+                <input type="text" class="form-control rounded" value="{{patient.numeroPassport}}" placeholder="Numéro du passeport" readonly>
               </div>
             </div>
           </form>
