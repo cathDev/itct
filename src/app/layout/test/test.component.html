@@ -104,17 +104,22 @@
                 </div>
               </form>
             </div>
-            <div class="col-md-3" style="margin-top: 80px;">
+            <div class="col-md-3" style="margin-top: 350px;">
               <div class="text-right">
-                <div class="checkbox">
+                <div class="checkbox" style="margin-right: 110px;">
                   <label>
                     <input type="checkbox" name="checkbox" class="rounded"> Check me out
                   </label>
                 </div>
               </div><br/>
-              <div class="text-right col-md-12">
-                <button type="submit" class="btn btn-secondary" (click)="resetForm()">Annuler</button>&nbsp;&nbsp;
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <div class="text-right col-md-12 row">
+                <div class="col-md-5">
+                  <button type="submit" class="btn btn-secondary-one" (click)="resetForm()">Annuler</button>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
+                  <button type="submit" class="btn btn-primary-one">Enregistrer</button>
+                </div>
               </div>
             </div>
           </div>

@@ -433,7 +433,7 @@ table.table td h2 span {
 }
 .btn-primary {
 	border-color: transparent;
-	background-color: #009efb;
+	background-color: #96ab5c;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -702,7 +702,7 @@ textarea.form-control {
 -----------------------*/
 
 .header {
-	background-color: #009efb;
+	background-color: #96ab5c;
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -847,17 +847,17 @@ textarea.form-control {
 	padding: 0;
 }
 .sidebar-menu li a {
-	color: #888;
+	color: #000;
 	display: block;
 	font-size: 15px;
 	height: auto;
 	padding: 0 20px;
 }
 .sidebar-menu li a:hover {
-	color: #009efb;
+	color: #96ab5c;
 }
 .sidebar-menu li.active a {
-	color: #009efb;
+	color: #96ab5c;
 	background-color: #f3f3f3;
 }
 .menu-title {
@@ -1223,13 +1223,37 @@ ul.chat-user-total li i.old-users {
 .new-patient-table tr td img {
 	margin-right: 5px;
 }
-.btn-primary-one {
-	border: 1px solid #ffbc35;
+.btn-primary-one:hover  {
+	border: 1px solid #96ab5c;
 	border-radius: 25px;
 	width: 100px;
 	background: transparent;
-	color: #000;
+	color: #96ab5c;
 }
+
+.btn-primary-one{
+  border: 1px solid #96ab5c;
+  border-radius: 25px;
+  width: 100px;
+  background: #96ab5c;
+  color: #fff;
+}
+
+.btn-secondary-one {
+  border-radius: 25px;
+  color: #fff;
+  width: 100px;
+  background-color: #6c757d;
+  border: 1px solid #6c757d;
+}
+.btn-secondary-one:hover {
+  border-radius: 25px;
+  color: #6c757d;
+  width: 100px;
+  background: transparent;
+  border: 1px solid #6c757d;
+}
+
 .btn-primary-two {
 	border: 1px solid #009efb;
 	border-radius: 25px;
