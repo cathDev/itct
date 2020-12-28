@@ -1,0 +1,4 @@
+.activeAppointment:hover{
+  background-color: #96ab5c;
+  box-shadow: 4px 4px 2px grey;
+}
