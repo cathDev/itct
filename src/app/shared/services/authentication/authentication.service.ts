@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {interval} from "rxjs/internal/observable/interval";
 import {Router} from '@angular/router';
-/*import {ToastrService} from 'ngx-toastr';*/
 import {ResourceService} from '../resource/resource.service';
 
 @Injectable({
@@ -21,7 +20,6 @@ export class AuthenticationService {
   constructor(
     private resourceService: ResourceService,
     private router: Router,
-    /*private toastr: ToastrService,*/
   ) { }
 
   public login(user): Observable<any>{
@@ -30,9 +28,10 @@ export class AuthenticationService {
 
   public logout(){
   /*public logout(obj){*/
-    localStorage.removeItem('userConnect');
+    /*localStorage.removeItem('userConnect');
     localStorage.removeItem('conected');
-    localStorage.removeItem('token');
+    localStorage.removeItem('token');*/
+    localStorage.clear();
     this.router.navigateByUrl("/login");
     /*return this.resourceService.saveResource(this.logoutUrl, obj);*/
   }

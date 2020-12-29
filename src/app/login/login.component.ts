@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../shared/services/authentication/authentication.service';
 import {ResourceService} from '../shared/services/resource/resource.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {ToastrService} from 'ngx-toastr';
 
 declare function tools(): any;
 
@@ -21,17 +22,20 @@ export class LoginComponent implements OnInit {
               private router : Router,
               private formBuilder : FormBuilder,
               private resourceService : ResourceService,
-             /* private toastr: ToastrService,*/
+              private toastr: ToastrService,
               private spinner: NgxSpinnerService,
-              ) { }
+              ) {
+
+  }
 
 
   ngOnInit() {
     tools();
     this.initForm();
 
-    if(this.authenticationService.isAuthenticate()){
-      this.router.navigate(['/dashboard']);
+    if(this.resourceService.getSession() == true){
+      console.log(this.resourceService.getSession());
+      this.toastr.error("Votre session a expiré.");
     }
 
   }
@@ -53,10 +57,14 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.loginForm.value)
       .subscribe(res => {
         response = res;
+        var date;
         if(response.authenticationToken != null){
           localStorage.setItem('userConnect', JSON.stringify(response));
           localStorage.setItem('conected', 'true');
+          date = new Date();
+          localStorage.setItem('conected_hour', date);
           localStorage.setItem('token', response.authenticationToken);
+          localStorage.setItem('expireAt', response.expiresAt);
           this.message = "";
           this.router.navigate(['/dashboard']);
         }

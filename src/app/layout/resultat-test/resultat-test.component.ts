@@ -30,7 +30,7 @@ export class ResultatTestComponent implements OnInit {
     this.allTest();
   }
 
-  public searchPatient(id){
+  public searchPatient(){
     this.resourceService.getResources(this.url)
       .subscribe(res => {
           this.patient = res;
