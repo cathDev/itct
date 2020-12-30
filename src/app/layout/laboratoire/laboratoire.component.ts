@@ -12,6 +12,10 @@ export class LaboratoireComponent implements OnInit {
   form : FormGroup;
   url: string = "/laboratoire";
   laboratoires : any = [];
+  imagePath: string = "";
+  urlFile: any;
+  vaccinChecked: any;
+  vaccins: any = [];
 
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,) { }
@@ -27,6 +31,9 @@ export class LaboratoireComponent implements OnInit {
       longitude: ['', Validators.required],
       nom: ['', Validators.required],
       ville: ['', Validators.required],
+      service: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
@@ -47,6 +54,29 @@ export class LaboratoireComponent implements OnInit {
         error => {
         console.log(error);
         });
+  }
+
+  onFileChanged(event) {
+    const files = event.target.files;
+    if (files.length === 0)
+      return;
+
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      /*this.message = "Only images are supported.";*/
+      return;
+    }
+
+    const reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.urlFile = reader.result;
+    }
+  }
+
+  addVaccin(){
+
   }
 
 }

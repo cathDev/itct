@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ResourceService} from '../../shared/services/resource/resource.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
+import {NgxSpinnerService} from 'ngx-spinner';
+import {ToastrService} from 'ngx-toastr';
 
 declare function tools(): any;
 
@@ -19,16 +22,36 @@ export class ResultatTestComponent implements OnInit {
   search: string = "";
   birthday: string = "";
   imagePath: any;
+  userConnected : any = {};
+  labo : any = {};
+
+  form: FormGroup;
 
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
+              private authenticationService: AuthenticationService,
+              private toastr: ToastrService,
+              private spinner: NgxSpinnerService,
               private sanitizer:DomSanitizer) { }
 
   ngOnInit() {
     tools();
     this.allPatient();
     this.allTest();
+    this.initForm();
+    this. userConnected = this.authenticationService.getUserInLocalStorage();
+    this.labo = this.userConnected.laboratoire;
   }
+
+  initForm() {
+    this.form = this.formBuilder.group({
+      igg: ['', Validators.required],
+      igm: ['', Validators.required],
+      testCommentaire: ['', Validators.required],
+    });
+  }
+
+  get f() { return this.form.controls; }
 
   public searchPatient(){
     this.resourceService.getResources(this.url)
@@ -80,6 +103,34 @@ export class ResultatTestComponent implements OnInit {
     const output = day + '-'+month+'-'+year;
     console.log(output);
     return output;
+  }
+
+  saveTest(){
+    this.spinner.show();
+    console.log(this.form.value);
+    var test = {
+      laboratoire: {
+        id:this.labo.id
+      },
+      commentaire: this.form.get("testCommentaire").value,
+      patient: {
+        id: this.patient.id
+      },
+      testIGG: this.form.get("igg").value,
+      testIGM: this.form.get("igm").value
+    };
+
+    this.resourceService.saveResource("/client/test/save", test)
+      .subscribe(res => {
+          this.spinner.hide();
+          this.form.reset();
+          this.toastr.success("Opération effectuée avec succès.");
+        },
+        error => {
+          this.spinner.hide();
+          this.toastr.success("Une erreur est survenue, reéssayez plus tard.");
+          console.log(error);
+        });
   }
 
 }

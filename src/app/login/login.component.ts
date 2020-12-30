@@ -6,7 +6,8 @@ import {ResourceService} from '../shared/services/resource/resource.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {ToastrService} from 'ngx-toastr';
 
-declare function tools(): any;
+/*declare function tools(): any;*/
+declare function loginEvent(): any;
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   message: string = "";
+  messageSessionExpire: string = "";
 
   constructor(private authenticationService : AuthenticationService,
               private router : Router,
@@ -30,14 +32,22 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    tools();
+    loginEvent();
     this.initForm();
-
-    if(this.resourceService.getSession() == true){
+    /*this.messageSessionExpire = this.resourceService.getSession();*/
+    /*if(this.resourceService.getSession() == true){
       console.log(this.resourceService.getSession());
       this.toastr.error("Votre session a expiré.");
-    }
+    }*/
 
+  }
+
+  ngAfterViewInit() {
+    if (this.resourceService.getSession() == true) {
+      setTimeout(() => {
+        this.toastr.success('Register Successful, please login');
+      }, 3);
+    }
   }
 
   initForm() {
@@ -77,6 +87,11 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
         this.message = "Nom d'utilisateur ou mot de passe incorrect.";
       });
+  }
+
+  public passwordVisibility(pwd){
+    console.log("click on password");
+    pwd.type = pwd.type === 'password' ?  'text' : 'password';
   }
 
 }

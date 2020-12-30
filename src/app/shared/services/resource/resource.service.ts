@@ -62,7 +62,8 @@ export class ResourceService {
   }
 
   public saveResource(url, data:any): Observable<any[]>{
-    return this.http.post<any[]>(this.host+url, data);
+    this.invalidToken();
+    return this.http.post<any[]>(this.host+url, data,this.getAuthenticationHeaders());
   }
 
   public resourceForLogin(url, data:any): Observable<any[]>{
@@ -96,11 +97,12 @@ export class ResourceService {
     console.log(timeDif);
 
     if(timeDif >= Number(localStorage.getItem('expireAt'))){
+    /*if(timeDif >= 120000){*/
       localStorage.clear();
       this.sessionExpire = true;
       this.toastr.error("votre session a expiré");
       this.router.navigate(['/login']);
-      return ;
+      return;
     }
   }
 

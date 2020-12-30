@@ -1,4 +1,4 @@
-<div class="main-wrapper account-wrapper">
+<!--<div class="main-wrapper account-wrapper">
   <div class="account-page">
     <div class="account-center">
       <div class="account-box">
@@ -7,7 +7,7 @@
         </ngx-spinner>
         <form [formGroup]="loginForm" #formLogin="ngForm" (ngSubmit)="onLogin()" class="form-signin">
           <div class="account-logo">
-            <a href="index-2.html"><img src="assets/img/logo-dark.png" alt=""></a>
+            <a href="#"><img src="assets/img/logo-dark.png" alt=""></a>
           </div>
           <span *ngIf="message != ''" style="color: red; font-weight: bold">{{message}}</span>&nbsp;
           <div class="form-group">
@@ -35,6 +35,111 @@
           </div>
         </form>
       </div>
+    </div>
+  </div>
+</div>-->
+
+<div class="container">
+  <div class="forms-container">
+    <span *ngIf="messageSessionExpire != ''" style="color: red; font-weight: bold">{{messageSessionExpire}}</span>
+    <div class="signin-signup">
+      <ngx-spinner [fullScreen]="false" type="ball-clip-rotate-multiple" color="white" size="medium">
+        <p class="loading" style="font-size: 20px; color: white">Veuillez patienter</p>
+      </ngx-spinner>
+      <form [formGroup]="loginForm" #formLogin="ngForm" (ngSubmit)="onLogin()" class="sign-in-form">
+        <h2 class="title">Sign in</h2>
+        <span *ngIf="message != ''" style="color: red; font-weight: bold">{{message}}</span>&nbsp;
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Username" formControlName="username" autocomplete="off"/>
+        </div>
+        <div *ngIf="f.username.invalid && f.username.touched" class="text-danger">
+          &nbsp;<small *ngIf="f.username.errors.required">Le nom d'utilisateur est requis.</small>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-eye" (click)="passwordVisibility(pwd)" *ngIf="pwd.type == 'password'"></i>
+          <i class="fas fa-eye-slash" (click)="passwordVisibility(pwd)" *ngIf="pwd.type == 'text'"></i>
+          <input type="password" placeholder="Password" #pwd formControlName='password' autocomplete="off"/>
+        </div>
+        <div *ngIf="f.password.invalid && f.password.touched" class="text-danger">
+          &nbsp;<small *ngIf="f.password.errors.required">Le mot de passe est requis.</small>
+        </div>
+        <input type="submit" value="Login" class="btn solid" />
+        <p class="social-text">Or Sign in with social platforms</p>
+        <div class="social-media">
+          <a href="#" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </form>
+      <form action="#" class="sign-up-form">
+        <h2 class="title">Sign up</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Username" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input type="email" placeholder="Email" />
+        </div>
+
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" />
+        </div>
+        <input type="submit" class="btn" value="Sign up" />
+        <p class="social-text">Or Sign up with social platforms</p>
+        <div class="social-media">
+          <a href="#" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-google"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>New here ?</h3>
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
+        </p>
+        <button class="btn transparent" id="sign-up-btn">
+          Sign up
+        </button>
+      </div>
+      <img src="../../assets/img/sign.svg" class="image" alt="" />
+    </div>
+    <div class="panel right-panel">
+      <div class="content">
+        <h3>One of us ?</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
+        </p>
+        <button class="btn transparent" id="sign-in-btn">
+          Sign in
+        </button>
+      </div>
+      <img src="../../assets/img/register.svg" class="image" alt="" />
     </div>
   </div>
 </div>
