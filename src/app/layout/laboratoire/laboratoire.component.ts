@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ResourceService} from '../../shared/services/resource/resource.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-laboratoire',
@@ -15,14 +16,41 @@ export class LaboratoireComponent implements OnInit {
   imagePath: string = "";
   urlFile: any;
   vaccinChecked: any;
-  vaccins: any = [];
+  vaccinEffectuer: any = [];
+  vaccins: any = [
+    {
+      "id":1,
+      "label":"BCG"
+    },{
+      "id":2,
+      "label":"VAT"
+    },{
+      "id":3,
+      "label":"Tuberculose"
+    },
+  ];
+  dropdownSettings = {};
+
 
   constructor(private formBuilder : FormBuilder,
-              private resourceService : ResourceService,) { }
+              private resourceService : ResourceService,
+              private toastr: ToastrService,
+              ) { }
 
   ngOnInit() {
     this.initForm();
     this.getAllLabo();
+
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'label',
+      selectAllText: 'Sélectionner tout',
+      unSelectAllText: 'Désélectionner tout',
+      itemsShowLimit: 8,
+      allowSearchFilter: true
+    };
+
   }
 
   initForm() {
@@ -42,7 +70,7 @@ export class LaboratoireComponent implements OnInit {
   }
 
   saveLabo(){
-
+    console.log(this.vaccinEffectuer);
   }
 
   getAllLabo(){
@@ -73,10 +101,6 @@ export class LaboratoireComponent implements OnInit {
     reader.onload = (_event) => {
       this.urlFile = reader.result;
     }
-  }
-
-  addVaccin(){
-
   }
 
 }

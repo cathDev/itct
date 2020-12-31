@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ResourceService} from '../../shared/services/resource/resource.service';
-import {DomSanitizer} from '@angular/platform-browser';
-import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {DomSanitizer} from '@angular/platform-browser';
+import {ResourceService} from '../../shared/services/resource/resource.service';
+import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
 import {ToastrService} from 'ngx-toastr';
 
 declare function tools(): any;
 
 @Component({
-  selector: 'app-resultat-test',
-  templateUrl: './resultat-test.component.html',
-  styleUrls: ['./resultat-test.component.css']
+  selector: 'app-resultat-vaccin',
+  templateUrl: './resultat-vaccin.component.html',
+  styleUrls: ['./resultat-vaccin.component.css']
 })
-export class ResultatTestComponent implements OnInit {
+export class ResultatVaccinComponent implements OnInit {
 
   url: string = "/client/patient";
   patient : any = {};
@@ -24,6 +24,21 @@ export class ResultatTestComponent implements OnInit {
   imagePath: any;
   userConnected : any = {};
   labo : any = {};
+
+  vaccinEffectuer: any = [];
+  vaccins: any = [
+    {
+      "id":1,
+      "label":"BCG"
+    },{
+      "id":2,
+      "label":"VAT"
+    },{
+      "id":3,
+      "label":"Tuberculose"
+    },
+  ];
+  dropdownSettings = {};
 
   form: FormGroup;
 
@@ -41,6 +56,15 @@ export class ResultatTestComponent implements OnInit {
     this.initForm();
     this. userConnected = this.authenticationService.getUserInLocalStorage();
     this.labo = this.userConnected.laboratoire;
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'label',
+      selectAllText: 'Sélectionner tout',
+      unSelectAllText: 'Désélectionner tout',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
 
   initForm() {
@@ -105,7 +129,7 @@ export class ResultatTestComponent implements OnInit {
     return output;
   }
 
-  saveTest(){
+  saveVaccin(){
     this.spinner.show();
     console.log(this.form.value);
     var test = {

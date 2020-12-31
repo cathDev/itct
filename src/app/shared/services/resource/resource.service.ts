@@ -98,9 +98,10 @@ export class ResourceService {
 
     if(timeDif >= Number(localStorage.getItem('expireAt'))){
     /*if(timeDif >= 120000){*/
+      console.log("session expirée");
       localStorage.clear();
       this.sessionExpire = true;
-      this.toastr.error("votre session a expiré");
+      /*this.toastr.error("votre session a expiré");*/
       this.router.navigate(['/login']);
       return;
     }

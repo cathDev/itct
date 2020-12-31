@@ -15,6 +15,10 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import { ResultatTestComponent } from './resultat-test/resultat-test.component';
 import { ValidationVaccinComponent } from './validation-vaccin/validation-vaccin.component';
 import { TestComponent } from './test/test.component';
+import { ResultatVaccinComponent } from './resultat-vaccin/resultat-vaccin.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -29,14 +33,17 @@ import { TestComponent } from './test/test.component';
     LaboratoireComponent,
     ResultatTestComponent,
     ValidationVaccinComponent,
-    TestComponent
+    TestComponent,
+    ResultatVaccinComponent
   ],
   imports: [
     CommonModule,
     LayoutRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgMultiSelectDropDownModule,
+    NgxPaginationModule
   ]
 })
 export class LayoutModule { }

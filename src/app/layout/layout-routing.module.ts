@@ -9,6 +9,7 @@ import {PatientsComponent} from './patients/patients.component';
 import {LaboratoireComponent} from './laboratoire/laboratoire.component';
 import {ResultatTestComponent} from './resultat-test/resultat-test.component';
 import {TestComponent} from './test/test.component';
+import {ResultatVaccinComponent} from './resultat-vaccin/resultat-vaccin.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'laboratoires', component: LaboratoireComponent},
       {path: 'resultat', component: ResultatTestComponent},
       {path: 'tests', component: TestComponent},
+      {path: 'resultat-vaccin', component: ResultatVaccinComponent},
     ]
   },
 ];
