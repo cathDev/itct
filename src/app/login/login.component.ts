@@ -23,6 +23,24 @@ export class LoginComponent implements OnInit {
   urlProfilImage:any;
   urlPassportImage:any;
 
+  passportType = [
+    {
+      id:1,
+      label: 'ORDINNAIRE',
+      value: 'ordinnaire',
+    },
+    {
+      id:2,
+      label: 'SERVICE',
+      value: 'service',
+    },
+    {
+      id:3,
+      label: 'DIPLOMATIQUE',
+      value: 'diplomatique',
+    },
+  ];
+
   constructor(private authenticationService : AuthenticationService,
               private router : Router,
               private formBuilder : FormBuilder,
@@ -118,28 +136,40 @@ export class LoginComponent implements OnInit {
   }
 
   public register(){
+    this.spinner.show();
+
+    var typePassport;
+    this.passportType.forEach(type => {
+      if(type.id == this.registerForm.get("typePassport").value){
+        console.log(type);
+        typePassport = type;
+      }
+    });
+
     var imageId = this.urlProfilImage.split(",")[1];
     var imagepassport = this.urlPassportImage.split(",")[1];
-      this.spinner.show();
-      var patient = {
-        birthday: this.registerForm.get("birthday").value,
-        dateExpiration: this.registerForm.get("dateExpiration").value,
-        email: this.registerForm.get("email").value,
-        imageSelfie: imageId,
-        imagePassport: imagepassport,
-        name: this.registerForm.get("name").value,
-        numeroPassport: this.registerForm.get("numeroPassport").value,
-        phone: this.registerForm.get("phone").value,
-        sexe: this.registerForm.get("sexe").value,
-        password: this.registerForm.get("password").value,
-        username: this.registerForm.get("username").value,
-        typePassport: {
-          "id": this.registerForm.get("typePassport").value,
-        },
-        role: "PATIENT",
-        ville: this.registerForm.get("ville").value,
-        /*pays: this.registerForm.get("pays").value,*/
-      };
+
+    var patient = {
+      birthday: this.registerForm.get("birthday").value,
+      dateExpiration: this.registerForm.get("dateExpiration").value,
+      email: this.registerForm.get("email").value,
+      imageSelfie: imageId,
+      imagePassport: imagepassport,
+      name: this.registerForm.get("name").value,
+      numeroPassport: this.registerForm.get("numeroPassport").value,
+      phone: this.registerForm.get("phone").value,
+      sexe: this.registerForm.get("sexe").value,
+      password: this.registerForm.get("password").value,
+      username: this.registerForm.get("username").value,
+      typePassport: {
+        id: this.registerForm.get("typePassport").value,
+        libelle: typePassport.label
+      },
+      role: "PATIENT",
+      ville: this.registerForm.get("ville").value
+    };
+
+    console.log(patient);
 
       this.resourceService.resourceForLogin("/client/auth/register", patient)
         .subscribe(res => {

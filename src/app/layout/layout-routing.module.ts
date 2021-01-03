@@ -10,6 +10,7 @@ import {LaboratoireComponent} from './laboratoire/laboratoire.component';
 import {ResultatTestComponent} from './resultat-test/resultat-test.component';
 import {TestComponent} from './test/test.component';
 import {ResultatVaccinComponent} from './resultat-vaccin/resultat-vaccin.component';
+import {MesResultatsComponent} from './mes-resultats/mes-resultats.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
       {path: 'resultat-test', component: ResultatTestComponent},
       {path: 'tests', component: TestComponent},
       {path: 'resultat-vaccin', component: ResultatVaccinComponent},
+      {path: 'mes-resultat', component: MesResultatsComponent},
     ]
   },
 ];

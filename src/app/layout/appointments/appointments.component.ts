@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {ResourceService} from '../../shared/services/resource/resource.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
+
 
 @Component({
   selector: 'app-appointments',
@@ -17,6 +20,8 @@ export class AppointmentsComponent implements OnInit {
 
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
+              private router : Router,
+              private authenticationService : AuthenticationService,
               private sanitizer:DomSanitizer) { }
 
 
@@ -51,5 +56,19 @@ export class AppointmentsComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(image);
   }
 
+  public validateTestOrVaccin(obj, event){
+    event.preventDefault();
+    this.authenticationService.setPatient(obj.patient);
+    this.router.navigateByUrl("/resultat-test");
+    /*if(obj.objetAppointment == ""){
+      this.router.navigateByUrl("/resultat-test");
+    }
+    else if(obj.objetAppointment == ""){
+      this.router.navigateByUrl("/resultat-vaccin");
+    }*/
+
+    console.log("j'ai cliqué sur un rendez vous");
+    console.log(this.authenticationService.getPatient());
+  }
 
 }

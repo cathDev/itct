@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from '../../../shared/services/authentication/authentication.service';
 
 /*declare function slimscroll(): any;*/
 
@@ -10,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  user = this.authenticationService.getUserInLocalStorage();
+  constructor(private authenticationService : AuthenticationService,) { }
 
   ngOnInit() {
    /* slimscroll();*/

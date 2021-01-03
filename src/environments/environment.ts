@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: "https://15.236.153.248:8440/api/v1/itct",
+  baseUrl: "https://awaycovid.org:8440/api/v1/itct",
 };
 
 /*

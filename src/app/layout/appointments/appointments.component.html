@@ -17,8 +17,8 @@
       </div>
     </div><br/>
     <div class="row doctor-grid">
-      <div class="col-md-4 col-sm-4  col-lg-3" *ngFor="let appointment of appointments">
-        <div class="profile-widget activeAppointment">
+      <div class="col-md-4 col-sm-4  col-lg-3" *ngFor="let appointment of appointments" >
+        <div class="profile-widget activeAppointment" (click)="validateTestOrVaccin(appointment, $event)">
           <div class="doctor-img">
             <a class="avatar" href="#" *ngIf="image == null"><img alt="" src="assets/img/user.jpg"></a>
             <a class="avatar" href="#" *ngIf="image != null"><img alt="" [src]="patientImage(appointment.patient.imageId)"></a>

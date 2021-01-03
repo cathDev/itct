@@ -12,6 +12,7 @@ export class AuthenticationService {
 
   private loginUrl: string = "/client/auth/login";
   private logoutUrl: string = "/client/auth/logout";
+  patient: any = {};
 
   stopTimer: any;
   count: number = 0;
@@ -42,6 +43,14 @@ export class AuthenticationService {
 
   public getUserInLocalStorage(){
     return JSON.parse(localStorage.getItem('userConnect'));
+  }
+
+  public getPatient(){
+    return this.patient;
+  }
+
+  public setPatient(obj){
+    this.patient = obj;
   }
 
 }

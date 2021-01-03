@@ -101,8 +101,8 @@
               </div>-->
               <div class="account-logo">
                 <a href="#">
-                  <img alt="Cristina Groves" src="assets/img/user.jpg" class="img-fluid rounded-circle" *ngIf="patient.imageSelfie == null">
-                  <img alt="Cristina Groves" [src]="imagePath" class="img-fluid rounded-circle" *ngIf="patient.imageSelfie != null">
+                  <img alt="Cristina Groves" src="assets/img/user.jpg" class="img-fluid rounded-circle" *ngIf="((patient.imageSelfie == null) || (patient.imageSelfie == ''))">
+                  <img alt="Cristina Groves" [src]="imagePath" class="img-fluid rounded-circle" *ngIf="((patient.imageSelfie != null) && (patient.imageSelfie != ''))">
                 </a>
               </div>
             </div>

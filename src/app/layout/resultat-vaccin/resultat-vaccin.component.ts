@@ -122,7 +122,7 @@ export class ResultatVaccinComponent implements OnInit {
     this.resourceService.getResources("/vaccin/all")
       .subscribe(res => {
           this.vaccins = res;
-          console.log(this.rdv);
+          console.log(this.vaccins);
         },
         error => {
           console.log(error);

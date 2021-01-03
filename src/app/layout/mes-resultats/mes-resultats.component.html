@@ -1,0 +1,82 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div class="col-sm-4 col-3">
+        <h4 class="page-title">Résultats</h4>
+        <!--<ul class="breadcrumb">
+          <li><a routerLink="/dashboard">Tableau de bord</a></li>
+          <li>Laboratoire</li>
+        </ul>-->
+      </div>
+      <!--<div class="col-sm-8 col-9 text-right m-b-20">
+        <a href="add-patient.html" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Patient</a>
+      </div>-->
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card-box">
+          <div class="card-block">
+            <h4 class="card-title">Résultats de mes tests</h4>
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="bg-thead">
+                <tr>
+                  <th>Laboratoire</th>
+                  <th>Date</th>
+                  <th>Commentaire</th>
+                  <th>Test IGG</th>
+                  <th>Test IGM</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let test of tests">
+                  <td>{{test.laboratoire.name}}</td>
+                  <td>{{millisToDate(test.dateTest)}}</td>
+                  <td>{{test.commentaire}}</td>
+                  <td>
+                    <span *ngIf="test.testIGG == true">Positif</span>
+                    <span *ngIf="test.testIGG == false">Négatif</span>
+                  </td>
+                  <td>
+                    <span *ngIf="test.testIGM == true">Positif</span>
+                    <span *ngIf="test.testIGM == false">Négatif</span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card-box">
+          <div class="card-block">
+            <h4 class="card-title">Résultats de mes vaccins</h4>
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead class="bg-thead">
+                <tr>
+                  <th>Laboratoire</th>
+                  <th>Date</th>
+                  <th>Vaccin</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let vaccin of vaccins">
+                  <td>{{vaccin.laboratoire.name}}</td>
+                  <td>{{millisToDate(vaccin.dateVaccin)}}</td>
+                  <td>{{vaccin.vaccin.nomVaccin}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

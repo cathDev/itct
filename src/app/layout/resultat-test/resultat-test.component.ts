@@ -16,7 +16,6 @@ declare function tools(): any;
 export class ResultatTestComponent implements OnInit {
 
   url: string = "/client/patient";
-  patient : any = {};
   patients : any = [];
   tests : any = [];
   rdv : any = [];
@@ -28,22 +27,32 @@ export class ResultatTestComponent implements OnInit {
   labo : any = {};
 
   form: FormGroup;
-
+  patient : any = {};
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private authenticationService: AuthenticationService,
-              private toastr: ToastrService,
               private spinner: NgxSpinnerService,
+              private toast: ToastrService,
               private sanitizer:DomSanitizer) { }
 
   ngOnInit() {
     tools();
     this. userConnected = this.authenticationService.getUserInLocalStorage();
     this.labo = this.userConnected.laboratoire;
+    this.patient = this.authenticationService.getPatient();
     this.allPatient();
     this.allTest();
     this.allRDV();
     this.initForm();
+
+    console.log("voici le patient");
+    console.log(this.patient);
+    this.birthday = this.millisToDate(this.patient.birthday);
+    var image = 'data:image/png;base64,'+this.patient.imageSelfie;
+    this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
+    var imagePassport = 'data:image/png;base64,'+this.patient.imagePassport;
+    this.imagePassport = this.sanitizer.bypassSecurityTrustResourceUrl(imagePassport);
+
 
   }
 
@@ -57,15 +66,15 @@ export class ResultatTestComponent implements OnInit {
 
   get f() { return this.form.controls; }
 
-  public searchPatient(){
+  /*public searchPatient(){
     var image;
     var imagePassport;
     var result;
-    /*let params = new HttpParams().set('identifiant', this.search);*/
+    /!*let params = new HttpParams().set('identifiant', this.search);*!/
     this.resourceService.getResourcesById(this.url+"/search", this.search)
       .subscribe(res => {
           result = res;
-          /* if()*/
+          /!* if()*!/
           this.patient = res;
           this.birthday = this.millisToDate(this.patient.birthday);
           image = 'data:image/png;base64,'+this.patient.imageSelfie;
@@ -77,7 +86,7 @@ export class ResultatTestComponent implements OnInit {
         error => {
           console.log(error);
         });
-  }
+  }*/
 
   public allPatient(){
     var image;
@@ -153,13 +162,13 @@ export class ResultatTestComponent implements OnInit {
         console.log("le test est bien enregistrer");
           this.spinner.hide();
           this.form.reset();
-          this.toastr.success("Opération effectuée avec succès.");
+          this.toast.success("Opération effectuée avec succès.");
         },
         error => {
           console.log("le test n'est pas bien enregistrer");
           this.spinner.hide();
           this.form.reset();
-          this.toastr.success("Une erreur est survenue, reéssayez plus tard.");
+          this.toast.error("Une erreur est survenue, reéssayez plus tard.");
           console.log(error);
         });
   }
