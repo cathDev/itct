@@ -81,23 +81,88 @@
           </a>
         </div>
       </form>
-      <form action="#" class="sign-up-form">
+      <form [formGroup]="registerForm" (ngSubmit)="register()" class="sign-up-form">
         <h2 class="title">Sign up</h2>
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Nom et prénom" formControlName="name"/>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-calendar"></i>
+          <input type="text" class="date" placeholder="Date de naissance" formControlName="birthday" onfocus="(this.type='date')"/>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Nom d'utilisateur" formControlName="username"/>
         </div>
         <div class="input-field">
           <i class="fas fa-envelope"></i>
-          <input type="email" placeholder="Email" />
+          <input type="email" placeholder="Email" formControlName="email"/>
         </div>
-
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Password" formControlName="password"/>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-phone"></i>
+          <input type="text" placeholder="Téléphone" formControlName="phone"/>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-location-arrow"></i>
+          <input type="text" placeholder="Sexe" formControlName="sexe"/>
+        </div>
+        <!--<div class="input-field col-md-12">
+          &lt;!&ndash;<i class="fas fa-map-marker"></i>&ndash;&gt;
+          <select name="" formControlName="pays">
+            <option disabled>Pays</option>
+            <option value="">option 1</option>
+            <option value="">option 2</option>
+          </select>
+        </div>-->
+        <div class="input-field">
+          <i class="fas fa-map-marker"></i>
+          <input type="text" placeholder="Ville" formControlName="ville"/>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-credit-card"></i>
+          <input type="text" placeholder="Numéro de passport" formControlName="numeroPassport"/>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-calendar"></i>
+          <input type="text" placeholder="Date expiration" formControlName="dateExpiration" onfocus="(this.type='date')"/>
+        </div>
+        <div class="col-md-12">
+          <!--<i class="fas fa-map-marker"></i>-->
+          <select name="" id="" formControlName="typePassport">
+            <option value="" selected="selected" disabled>Type de passport</option>
+            <option value="1">option 1</option>
+            <option value="2">option 2</option>
+          </select>
+        </div>
+        <div class="">
+         <!-- <i class="fas fa-camera"></i>-->
+          <input type="file" placeholder="Photo du passport" (change)="onFileChanged($event)" formControlName="imagePassport"/>
+        </div>
+        <a class="chat-img-attach" >
+         <!-- <img width="182" height="137" alt="image du passport" src="assets/img/doctor-03.jpg" *ngIf="urlPassportImage == null">-->
+          <img width="182" height="137" alt="image du passport" [src]="urlPassportImage"  *ngIf="urlPassportImage != null">
+          <!--<div class="chat-placeholder">
+            <div class="chat-img-name">image du passeport</div>
+            &lt;!&ndash;<div class="chat-file-desc">842 KB</div>&ndash;&gt;
+          </div>-->
+        </a>
+        <div class="">
+          <!--<i class="fas fa-camera"></i>-->
+          <input type="file" placeholder="Photo de profil"  formControlName="imageSelfie" (change)="uploadImageProfil($event)"/>
+        </div>
+        <div class="account-logo">
+          <a href="#">
+           <!-- <img alt="Photo de profil" src="assets/img/user.jpg" class="img-fluid rounded-circle" *ngIf="urlProfilImage == null">-->
+            <img alt="Photo de profil" [src]="urlProfilImage" class="img-fluid rounded-circle" *ngIf="urlProfilImage != null">
+          </a>
         </div>
         <input type="submit" class="btn" value="Sign up" />
-        <p class="social-text">Or Sign up with social platforms</p>
+        <!--<p class="social-text">Or Sign up with social platforms</p>
         <div class="social-media">
           <a href="#" class="social-icon">
             <i class="fab fa-facebook-f"></i>
@@ -111,7 +176,7 @@
           <a href="#" class="social-icon">
             <i class="fab fa-linkedin-in"></i>
           </a>
-        </div>
+        </div>-->
       </form>
     </div>
   </div>

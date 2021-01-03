@@ -17,18 +17,7 @@ export class LaboratoireComponent implements OnInit {
   urlFile: any;
   vaccinChecked: any;
   vaccinEffectuer: any = [];
-  vaccins: any = [
-    {
-      "id":1,
-      "label":"BCG"
-    },{
-      "id":2,
-      "label":"VAT"
-    },{
-      "id":3,
-      "label":"Tuberculose"
-    },
-  ];
+  vaccins: any = [];
   dropdownSettings = {};
 
 
@@ -40,11 +29,12 @@ export class LaboratoireComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.getAllLabo();
+    this.allVaccin();
 
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
-      textField: 'label',
+      textField: 'nomVaccin',
       selectAllText: 'Sélectionner tout',
       unSelectAllText: 'Désélectionner tout',
       itemsShowLimit: 8,
@@ -81,6 +71,17 @@ export class LaboratoireComponent implements OnInit {
       },
         error => {
         console.log(error);
+        });
+  }
+
+  public allVaccin(){
+    this.resourceService.getResources("/vaccin/all")
+      .subscribe(res => {
+          this.vaccins = res;
+          console.log(this.vaccins);
+        },
+        error => {
+          console.log(error);
         });
   }
 

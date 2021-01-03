@@ -21,7 +21,7 @@ const routes: Routes = [
       {path: 'doctors', component: DoctorComponent},
       {path: 'patients', component: PatientsComponent},
       {path: 'laboratoires', component: LaboratoireComponent},
-      {path: 'resultat', component: ResultatTestComponent},
+      {path: 'resultat-test', component: ResultatTestComponent},
       {path: 'tests', component: TestComponent},
       {path: 'resultat-vaccin', component: ResultatVaccinComponent},
     ]

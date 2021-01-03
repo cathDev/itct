@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
@@ -48,12 +48,14 @@ export class ResourceService {
     return this.http.get(this.host + url);
   }
 
-  public getResourcesById(url: string, id:number){
-    return this.http.get(this.host+url+"/"+id);
+  public getResourcesById(url: string, id:any){
+    this.invalidToken();
+    return this.http.get(this.host+url+"/"+id, this.getAuthenticationHeaders());
   }
 
-  public getResourceByParam(url, params){
-    return this.http.get(this.host+url, { params });
+  public getResourceByParam(url, params: HttpParams){
+    this.invalidToken();
+    return this.http.get(this.host+url, {params: params });
   }
 
   public deleteResource(url, id){

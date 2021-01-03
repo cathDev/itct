@@ -5,6 +5,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {ResourceService} from '../../shared/services/resource/resource.service';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
 import {ToastrService} from 'ngx-toastr';
+import {HttpParams} from '@angular/common/http';
 
 declare function tools(): any;
 
@@ -19,28 +20,17 @@ export class ResultatVaccinComponent implements OnInit {
   patient : any = {};
   patients : any = [];
   tests : any = [];
+  rdv : any = [];
+  vaccins : any = [];
   search: string = "";
   birthday: string = "";
   imagePath: any;
   userConnected : any = {};
   labo : any = {};
+  commentaire : string = "";
 
   vaccinEffectuer: any = [];
-  vaccins: any = [
-    {
-      "id":1,
-      "label":"BCG"
-    },{
-      "id":2,
-      "label":"VAT"
-    },{
-      "id":3,
-      "label":"Tuberculose"
-    },
-  ];
   dropdownSettings = {};
-
-  form: FormGroup;
 
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
@@ -51,36 +41,36 @@ export class ResultatVaccinComponent implements OnInit {
 
   ngOnInit() {
     tools();
-    this.allPatient();
-    this.allTest();
-    this.initForm();
     this. userConnected = this.authenticationService.getUserInLocalStorage();
     this.labo = this.userConnected.laboratoire;
+    this.allPatient();
+    this.allTest();
     this.dropdownSettings = {
-      singleSelection: false,
+      singleSelection: true,
       idField: 'id',
-      textField: 'label',
+      textField: 'nomVaccin',
       selectAllText: 'Sélectionner tout',
       unSelectAllText: 'Désélectionner tout',
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
-  }
 
-  initForm() {
-    this.form = this.formBuilder.group({
-      igg: ['', Validators.required],
-      igm: ['', Validators.required],
-      testCommentaire: ['', Validators.required],
-    });
+    this.allRDV();
+    this.allVaccin();
   }
-
-  get f() { return this.form.controls; }
 
   public searchPatient(){
-    this.resourceService.getResources(this.url)
+    var image;
+    var result;
+    /*let params = new HttpParams().set('identifiant', this.search);*/
+    this.resourceService.getResourcesById(this.url+"/search", this.search)
       .subscribe(res => {
+          result = res;
+         /* if()*/
           this.patient = res;
+          this.birthday = this.millisToDate(this.patient.birthday);
+          image = 'data:image/png;base64,'+this.patient.imageSelfie;
+          this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
           console.log(this.patient);
         },
         error => {
@@ -93,12 +83,13 @@ export class ResultatVaccinComponent implements OnInit {
     this.resourceService.getResources(this.url+"/all")
       .subscribe(res => {
           this.patients = res;
-          this.patient = this.patients[0];
+          console.log(this.patients);
+          /*this.patient = this.patients[0];
           this.birthday = this.millisToDate(this.patient.birthday);
           image = 'data:image/png;base64,'+this.patient.imageSelfie;
           this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
           console.log(this.patients);
-          console.log(this.patient);
+          console.log(this.patient);*/
         },
         error => {
           console.log(error);
@@ -110,6 +101,28 @@ export class ResultatVaccinComponent implements OnInit {
       .subscribe(res => {
           this.tests = res;
           console.log(this.tests);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  public allRDV(){
+    this.resourceService.getResourcesById("/client/appointment/labo",this.labo.id)
+      .subscribe(res => {
+          this.rdv = res;
+          console.log(this.rdv);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  public allVaccin(){
+    this.resourceService.getResources("/vaccin/all")
+      .subscribe(res => {
+          this.vaccins = res;
+          console.log(this.rdv);
         },
         error => {
           console.log(error);
@@ -131,28 +144,28 @@ export class ResultatVaccinComponent implements OnInit {
 
   saveVaccin(){
     this.spinner.show();
-    console.log(this.form.value);
     var test = {
       laboratoire: {
         id:this.labo.id
       },
-      commentaire: this.form.get("testCommentaire").value,
       patient: {
-        id: this.patient.id
+        identifiant: this.patient.identifiant
       },
-      testIGG: this.form.get("igg").value,
-      testIGM: this.form.get("igm").value
+      vaccin: {
+        id: this.vaccinEffectuer[0].id
+      },
+      status: true,
     };
-
-    this.resourceService.saveResource("/client/test/save", test)
+    this.resourceService.saveResource("/client/vaccinate/save", test)
       .subscribe(res => {
           this.spinner.hide();
-          this.form.reset();
+          this.vaccinEffectuer = [];
           this.toastr.success("Opération effectuée avec succès.");
+          console.log("opération reussi");
         },
         error => {
           this.spinner.hide();
-          this.toastr.success("Une erreur est survenue, reéssayez plus tard.");
+          this.toastr.error("Une erreur est survenue, reéssayez plus tard.");
           console.log(error);
         });
   }
