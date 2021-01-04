@@ -1,0 +1,13 @@
+{
+  "Main": "Principal",
+  "Dashboard": "Tableau de bord",
+  "Appointment": "Rendez-vous",
+  "Make an appointment": "Prendre un RDV",
+  "My results" : "Mes résultats",
+  "Test result" : "Resultat de test",
+  "Vaccine result" : "Resultat de vaccin",
+  "Register a laboratory" : "Enregistrer un laboratoire",
+  "My Profile" : "Mon Profil",
+  "Logout": "Se Déconnecter",
+  "validate a test": "valider un test"
+}

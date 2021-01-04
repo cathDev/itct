@@ -12,7 +12,10 @@ import {AuthenticationService} from '../../../shared/services/authentication/aut
 export class SidebarComponent implements OnInit {
 
   user = this.authenticationService.getUserInLocalStorage();
-  constructor(private authenticationService : AuthenticationService,) { }
+  constructor(
+    private authenticationService : AuthenticationService,
+    ) {
+  }
 
   ngOnInit() {
    /* slimscroll();*/

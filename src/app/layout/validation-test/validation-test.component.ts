@@ -1,35 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {ToastrService} from 'ngx-toastr';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ResourceService} from '../../shared/services/resource/resource.service';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
-import {ToastrService} from 'ngx-toastr';
 
 declare function tools(): any;
 
 @Component({
-  selector: 'app-resultat-vaccin',
-  templateUrl: './resultat-vaccin.component.html',
-  styleUrls: ['./resultat-vaccin.component.css']
+  selector: 'app-validation-test',
+  templateUrl: './validation-test.component.html',
+  styleUrls: ['./validation-test.component.css']
 })
-export class ResultatVaccinComponent implements OnInit {
+export class ValidationTestComponent implements OnInit {
 
   url: string = "/client/patient";
   patient : any = {};
   patients : any = [];
   tests : any = [];
   rdv : any = [];
-  vaccins : any = [];
   search: string = "";
+  soins: boolean = false;
   birthday: string = "";
   imagePath: any;
   userConnected : any = {};
   labo : any = {};
-  commentaire : string = "";
-
-  vaccinEffectuer: any = [];
-  dropdownSettings = {};
 
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
@@ -44,28 +40,16 @@ export class ResultatVaccinComponent implements OnInit {
     this.labo = this.userConnected.laboratoire;
     this.allPatient();
     this.allTest();
-    this.dropdownSettings = {
-      singleSelection: true,
-      idField: 'id',
-      textField: 'nomVaccin',
-      selectAllText: 'Sélectionner tout',
-      unSelectAllText: 'Désélectionner tout',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
-
     this.allRDV();
-    this.allVaccin();
   }
 
   public searchPatient(){
     var image;
     var result;
-    /*let params = new HttpParams().set('identifiant', this.search);*/
     this.resourceService.getResourcesById(this.url+"/search", this.search)
       .subscribe(res => {
           result = res;
-         /* if()*/
+          /* if()*/
           this.patient = res;
           this.birthday = this.millisToDate(this.patient.birthday);
           image = 'data:image/png;base64,'+this.patient.imageSelfie;
@@ -117,17 +101,6 @@ export class ResultatVaccinComponent implements OnInit {
         });
   }
 
-  public allVaccin(){
-    this.resourceService.getResources("/vaccin/all")
-      .subscribe(res => {
-          this.vaccins = res;
-          console.log(this.vaccins);
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
   public millisToDate(millis){
     console.log(new Date(millis));
     const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
@@ -150,15 +123,13 @@ export class ResultatVaccinComponent implements OnInit {
       patient: {
         identifiant: this.patient.identifiant
       },
-      vaccin: {
-        id: this.vaccinEffectuer[0].id
-      },
       status: true,
     };
-    this.resourceService.saveResource("/client/vaccinate/save", test)
+
+    console.log("voici la valeur du check box", this.soins);
+    /*this.resourceService.saveResource("/client/vaccinate/save", test)
       .subscribe(res => {
           this.spinner.hide();
-          this.vaccinEffectuer = [];
           this.toastr.success("Opération effectuée avec succès.");
           console.log("opération reussi");
         },
@@ -166,7 +137,7 @@ export class ResultatVaccinComponent implements OnInit {
           this.spinner.hide();
           this.toastr.error("Une erreur est survenue, reéssayez plus tard.");
           console.log(error);
-        });
+        });*/
   }
 
 }

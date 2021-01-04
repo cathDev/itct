@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../../../shared/services/authentication/authentication.service';
+import {UtilsService} from '../../../shared/services/utils/utils.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,12 @@ import {AuthenticationService} from '../../../shared/services/authentication/aut
 export class HeaderComponent implements OnInit {
   userConnected: any = {};
 
-  constructor(private authenticationService : AuthenticationService,) { }
+  constructor(
+    private authenticationService : AuthenticationService,
+    private utilsService: UtilsService,
+    private translate: TranslateService,
+
+  ) { }
 
   ngOnInit() {
     this.userConnected = this.authenticationService.getUserInLocalStorage();
@@ -18,6 +25,11 @@ export class HeaderComponent implements OnInit {
   logout(event){
     event.preventDefault();
     this.authenticationService.logout();
+  }
+
+  switchLang(language : string, event){
+    event.preventDefault();
+    this.translate.use(language);
   }
 
 }

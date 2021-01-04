@@ -33,7 +33,7 @@
     <div class="row">
       <div class="search-box">
         <div class="input-group input-group-md" style="margin-left: 15px; background-color: #fafafa;">
-          <input type="text" class="form-control" placeholder="identifiant du patient" name="search" [(ngModel)]="search">
+          <input type="text" class="form-control" placeholder="N° anonymat" name="search" [(ngModel)]="search">
           <span class="input-group-append">
             <button class="btn" type="button" (click)="searchPatient()" [disabled]="search == ''"><i class="fa fa-search"></i></button>
           </span>
@@ -41,17 +41,19 @@
       </div>
     </div><br>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="card-box shadow-sm p-3 mb-5 bg-white rounded">
           <h4 class="card-title">Informations du vaccin</h4>
           <div class="form">
             <div class="form-group row">
-              <div class="col-md-12">
-                <input type="text" class="form-control rounded" value="{{patient.identifiant}}" placeholder="identifiant du patient" readonly>
+              <label class="col-md-3 col-form-label">N° anonymat</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control rounded" value="{{patient.identifiant}}" readonly>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12" style="margin-top: 15px;">
+              <label class="col-md-3 col-form-label">Sélectionner les vaccins</label>
+              <div class="col-md-9" style="margin-top: 15px;">
                 <ng-multiselect-dropdown
                   [placeholder]="'selectionner les vaccins effectués'"
                   [data]="vaccins"
@@ -63,7 +65,7 @@
             </div><br/>
             <h5 style="margin-bottom: 15px; margin-right: 10px;margin-left: 20px;" *ngIf="vaccinEffectuer.length > 0">Vaccins effecués sur le patient</h5>
             <div class="row" *ngIf="vaccinEffectuer.length > 0">
-              <div class="col-md-4" *ngFor="let obj of vaccinEffectuer">
+              <div class="col-md-3" *ngFor="let obj of vaccinEffectuer">
                 <input type="text" class="form-control rounded" value="{{obj.nomVaccin}}"/>
               </div>
             </div><br *ngIf="vaccinEffectuer.length > 0"/>
@@ -72,7 +74,7 @@
                 <textarea rows="3" cols="5" class="form-control rounded" placeholder="Observations" value="true" [(ngModel)]="commentaire"></textarea>
               </div>
             </div>-->
-            <div class="text-left">
+            <!--<div class="text-left">
               <div class="col-md-10">
                 <div class="checkbox">
                   <label>
@@ -80,25 +82,25 @@
                   </label>
                 </div>
               </div>
-            </div>
+            </div>-->
             <div class="text-right">
               <button type="submit" class="btn btn-primary-one" (click)="saveVaccin()" [disabled]="((patient | json) == '{}') || vaccinEffectuer.length == 0">Envoyer</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <!--<div class="col-md-6">
         <div class="card-box shadow-sm p-3 mb-5 bg-white rounded">
           <div class="row">
             <div class="col-md-8">
               <h4 class="card-title">Données du patient</h4>
             </div>
             <div class="col-md-4">
-              <!--<div class="chat-avatar card-title">
+              &lt;!&ndash;<div class="chat-avatar card-title">
                 <a href="profile.html" class="avatar">
                   <img alt="Cristina Groves" src="assets/img/doctor-thumb-03.jpg" class="img-fluid rounded-circle">
                 </a>
-              </div>-->
+              </div>&ndash;&gt;
               <div class="account-logo">
                 <a href="#">
                   <img alt="Cristina Groves" src="assets/img/user.jpg" class="img-fluid rounded-circle" *ngIf="((patient.imageSelfie == null) || (patient.imageSelfie == ''))">
@@ -137,13 +139,13 @@
                 <img width="182" height="137" alt="image du passeport" src="assets/img/doctor-03.jpg">
                 <div class="chat-placeholder">
                   <div class="chat-img-name">image du passeport</div>
-                  <!--<div class="chat-file-desc">842 KB</div>-->
+                  &lt;!&ndash;<div class="chat-file-desc">842 KB</div>&ndash;&gt;
                 </div>
               </a>
             </div>
           </form>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </div>

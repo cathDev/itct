@@ -19,6 +19,8 @@ import { ResultatVaccinComponent } from './resultat-vaccin/resultat-vaccin.compo
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { MesResultatsComponent } from './mes-resultats/mes-resultats.component';
+import {TranslateModule} from '@ngx-translate/core';
+import { ValidationTestComponent } from './validation-test/validation-test.component';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { MesResultatsComponent } from './mes-resultats/mes-resultats.component';
     ValidationVaccinComponent,
     TestComponent,
     ResultatVaccinComponent,
-    MesResultatsComponent
+    MesResultatsComponent,
+    ValidationTestComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +48,8 @@ import { MesResultatsComponent } from './mes-resultats/mes-resultats.component';
     ReactiveFormsModule,
     NgxSpinnerModule,
     NgMultiSelectDropDownModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
+    TranslateModule
   ]
 })
 export class LayoutModule { }
