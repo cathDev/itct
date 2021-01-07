@@ -4,14 +4,16 @@
   "Appointment": "Rendez-vous",
   "Make an appointment": "Prendre un RDV",
   "My results" : "Mes résultats",
-  "Test result" : "Résultat de test",
-  "Vaccine result" : "Résultat de vaccin",
+  "Covid19 test result" : "Résultat Test covid19",
+  "Vaccination" : "Vaccination",
   "Register a laboratory" : "Enregistrer un laboratoire",
   "My Profile" : "Mon Profil",
   "Logout": "Déconnexion",
-  "validate a test": "valider un test",
+  "Covid19 Test Sample": "Prélèvement Test Covid19",
   "English" : "Anglais",
   "French" : "Français",
   "Spanish" : "Espagnol",
-  "Please wait" : "Veuillez patienter"
+  "Please wait" : "Veuillez patienter",
+  "Sampler" : "Préleveur",
+  "Controller" : "Contrôleur"
 }

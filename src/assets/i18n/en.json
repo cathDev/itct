@@ -4,14 +4,16 @@
   "Appointment": "Appointment",
   "Make an appointment": "Make an appointment",
   "My results" : "My results",
-  "Test result" : "Test result",
-  "Vaccine result" : "Vaccine result",
+  "Covid19 test result" : "Covid19 test result",
+  "Vaccination" : "Vaccination",
   "Register a laboratory" : "Register a laboratory",
   "My Profile" : "My Profile",
   "Logout": "Logout",
-  "validate a test": "validate a test",
+  "Covid19 Test Sample": "Covid19 Test Sample",
   "English" : "English",
   "French" : "French",
   "Spanish" : "Spanish",
-  "Please wait" : "Please wait"
+  "Please wait" : "Please wait",
+  "Sampler" : "Sampler",
+  "Controller" : "Controller"
 }
