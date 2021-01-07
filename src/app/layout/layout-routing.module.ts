@@ -12,6 +12,8 @@ import {TestComponent} from './test/test.component';
 import {ResultatVaccinComponent} from './resultat-vaccin/resultat-vaccin.component';
 import {MesResultatsComponent} from './mes-resultats/mes-resultats.component';
 import {ValidationTestComponent} from './validation-test/validation-test.component';
+import {PreleveurComponent} from './preleveur/preleveur.component';
+import {ControleurComponent} from './controleur/controleur.component';
 
 const routes: Routes = [
   {
@@ -28,6 +30,8 @@ const routes: Routes = [
       {path: 'resultat-vaccin', component: ResultatVaccinComponent},
       {path: 'mes-resultat', component: MesResultatsComponent},
       {path: 'valider-test', component: ValidationTestComponent},
+      {path: 'preleveur', component: PreleveurComponent},
+      {path: 'controleur', component: ControleurComponent},
     ]
   },
 ];

@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr.css';
 
 ul.breadcrumb {
   padding: 10px 16px;
@@ -39,6 +40,3 @@ ul.breadcrumb li a:hover {
   color: #fff;
 }
 
-#toast-container > div {
-  opacity:1;
-}

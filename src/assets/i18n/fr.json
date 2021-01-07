@@ -4,10 +4,14 @@
   "Appointment": "Rendez-vous",
   "Make an appointment": "Prendre un RDV",
   "My results" : "Mes résultats",
-  "Test result" : "Resultat de test",
-  "Vaccine result" : "Resultat de vaccin",
+  "Test result" : "Résultat de test",
+  "Vaccine result" : "Résultat de vaccin",
   "Register a laboratory" : "Enregistrer un laboratoire",
   "My Profile" : "Mon Profil",
-  "Logout": "Se Déconnecter",
-  "validate a test": "valider un test"
+  "Logout": "Déconnexion",
+  "validate a test": "valider un test",
+  "English" : "Anglais",
+  "French" : "Français",
+  "Spanish" : "Espagnol",
+  "Please wait" : "Veuillez patienter"
 }

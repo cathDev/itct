@@ -36,6 +36,18 @@
             <span translate>validate a test</span>
           </a>
         </li>
+        <li *ngIf="user.laboratoire != null">
+          <a routerLink="/preleveur">
+            <i class="fa fa-calendar"></i>
+            <span translate>Préleveur</span>
+          </a>
+        </li>
+        <li *ngIf="user.laboratoire != null">
+          <a routerLink="/controleur">
+            <i class="fa fa-calendar"></i>
+            <span translate>Contrôleur</span>
+          </a>
+        </li>
         <li *ngIf="((user.patient == null) && (user.laboratoire == null))">
           <a routerLink="/laboratoires"><i class="fa fa-calendar"></i> <span translate>Register a laboratory</span></a>
         </li>

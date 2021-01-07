@@ -1,1 +1,13 @@
-@import "../../assets/css/loginStyle.css";
+/*@import "../../assets/css/loginStyle.css";*/
+
+.p-viewer, .p-viewer2{
+  float: right;
+  margin-top: -55px;
+  position: relative;
+  z-index: 1;
+  cursor:pointer;
+}
+
+.fa-eye {
+  color: #000;
+}

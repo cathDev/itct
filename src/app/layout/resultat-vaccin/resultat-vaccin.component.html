@@ -63,7 +63,7 @@
                 </ng-multiselect-dropdown>
               </div>
             </div><br/>
-            <h5 style="margin-bottom: 15px; margin-right: 10px;margin-left: 20px;" *ngIf="vaccinEffectuer.length > 0">Vaccins effecués sur le patient</h5>
+            <h5 style="margin-bottom: 15px; margin-right: 10px;margin-left: 20px;" *ngIf="vaccinEffectuer.length > 0">Vaccins effectués sur le patient</h5>
             <div class="row" *ngIf="vaccinEffectuer.length > 0">
               <div class="col-md-3" *ngFor="let obj of vaccinEffectuer">
                 <input type="text" class="form-control rounded" value="{{obj.nomVaccin}}"/>
@@ -74,15 +74,15 @@
                 <textarea rows="3" cols="5" class="form-control rounded" placeholder="Observations" value="true" [(ngModel)]="commentaire"></textarea>
               </div>
             </div>-->
-            <!--<div class="text-left">
+            <div class="text-left">
               <div class="col-md-10">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="checkbox" class="rounded"> Check me out
+                    <input type="checkbox" name="checkbox" class="rounded"> Vérifier
                   </label>
                 </div>
               </div>
-            </div>-->
+            </div>
             <div class="text-right">
               <button type="submit" class="btn btn-primary-one" (click)="saveVaccin()" [disabled]="((patient | json) == '{}') || vaccinEffectuer.length == 0">Envoyer</button>
             </div>

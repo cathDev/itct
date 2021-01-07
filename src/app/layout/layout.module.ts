@@ -21,6 +21,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { MesResultatsComponent } from './mes-resultats/mes-resultats.component';
 import {TranslateModule} from '@ngx-translate/core';
 import { ValidationTestComponent } from './validation-test/validation-test.component';
+import { PreleveurComponent } from './preleveur/preleveur.component';
+import { ControleurComponent } from './controleur/controleur.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { ValidationTestComponent } from './validation-test/validation-test.compo
     TestComponent,
     ResultatVaccinComponent,
     MesResultatsComponent,
-    ValidationTestComponent
+    ValidationTestComponent,
+    PreleveurComponent,
+    ControleurComponent
   ],
   imports: [
     CommonModule,

@@ -72,11 +72,6 @@
               <h4 class="card-title">Données du patient</h4>
             </div>
             <div class="col-md-4">
-              <!--<div class="chat-avatar card-title">
-                <a href="profile.html" class="avatar">
-                  <img alt="Cristina Groves" src="assets/img/doctor-thumb-03.jpg" class="img-fluid rounded-circle">
-                </a>
-              </div>-->
               <div class="account-logo">
                 <a href="#">
                   <img alt="Cristina Groves" src="assets/img/user.jpg" class="img-fluid rounded-circle" *ngIf="((patient.imageSelfie == null) || (patient.imageSelfie == ''))">
@@ -93,7 +88,7 @@
             </div>
             <div class="form-group row">
               <div class="col-md-6">
-                <input type="text" class="form-control rounded" value="{{patient.sexe}}" placeholder="Sex" readonly>
+                <input type="text" class="form-control rounded" value="{{patient.sexe}}" placeholder="Sexe" readonly>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control rounded" value="{{birthday}}" placeholder="Date de Naissance" readonly>
@@ -101,7 +96,7 @@
             </div>
             <div class="form-group row">
               <div class="col-md-6">
-                <input type="text" class="form-control rounded" value="{{patient.phone}}" placeholder="Télephone" readonly>
+                <input type="text" class="form-control rounded" value="{{patient.phone}}" placeholder="Téléphone" readonly>
               </div>
               <div class="col-md-6">
                 <input type="text" class="form-control rounded" value="{{patient.email}}" placeholder="Email" readonly>
@@ -112,7 +107,7 @@
                 <input type="text" class="form-control rounded" value="{{patient.numeroPassport}}" placeholder="Numéro du passeport" readonly>
               </div>
               <a class="chat-img-attach" >
-                <img width="182" height="137" alt="image du passeport" src="assets/img/doctor-03.jpg">
+                <img width="182" height="137" alt="image du passeport" src="assets/img/passeport.jpg">
                 <div class="chat-placeholder">
                   <div class="chat-img-name">image du passeport</div>
                   <!--<div class="chat-file-desc">842 KB</div>-->

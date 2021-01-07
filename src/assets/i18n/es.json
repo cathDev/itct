@@ -1,0 +1,17 @@
+{
+  "Main": "Principal",
+  "Dashboard": "Tablero",
+  "Appointment": "Cita",
+  "Make an appointment": "Haga una cita",
+  "My results" : "Mis resultados",
+  "Test result" : "Resultado de la prueba",
+  "Vaccine result" : "Resultado de la vacuna",
+  "Register a laboratory" : "Registrar un laboratorio",
+  "My Profile" : "Mi perfil",
+  "Logout": "Cerrar sesión",
+  "validate a test": "validar una prueba",
+  "English" : "Inglés",
+  "French" : "Francés",
+  "Spanish" : "Español",
+  "Please wait" : "Espere por favor"
+}

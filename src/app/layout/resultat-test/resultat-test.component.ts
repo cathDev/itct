@@ -66,27 +66,28 @@ export class ResultatTestComponent implements OnInit {
 
   get f() { return this.form.controls; }
 
-  /*public searchPatient(){
+  public searchPatient(){
     var image;
     var imagePassport;
     var result;
-    /!*let params = new HttpParams().set('identifiant', this.search);*!/
+    /*let params = new HttpParams().set('identifiant', this.search);*/
     this.resourceService.getResourcesById(this.url+"/search", this.search)
       .subscribe(res => {
           result = res;
-          /!* if()*!/
+          /* if()*/
           this.patient = res;
-          this.birthday = this.millisToDate(this.patient.birthday);
+          console.log(this.patient);
+          /*this.birthday = this.millisToDate(this.patient.birthday);
           image = 'data:image/png;base64,'+this.patient.imageSelfie;
           this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
           imagePassport = 'data:image/png;base64,'+this.patient.imagePassport;
           this.imagePassport = this.sanitizer.bypassSecurityTrustResourceUrl(imagePassport);
-          console.log(this.patient);
+          console.log(this.patient);*/
         },
         error => {
           console.log(error);
         });
-  }*/
+  }
 
   public allPatient(){
     var image;
@@ -167,7 +168,6 @@ export class ResultatTestComponent implements OnInit {
         error => {
           console.log("le test n'est pas bien enregistrer");
           this.spinner.hide();
-          this.form.reset();
           this.toast.error("Une erreur est survenue, reéssayez plus tard.");
           console.log(error);
         });

@@ -7,7 +7,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {ToastrService} from 'ngx-toastr';
 
 /*declare function tools(): any;*/
-declare function loginEvent(): any;
+/*declare function loginEvent(): any;*/
 
 @Component({
   selector: 'app-login',
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    loginEvent();
+   /* loginEvent();*/
     this.initForm();
     this.initRegisterForm();
 
