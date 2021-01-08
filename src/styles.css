@@ -40,3 +40,6 @@ ul.breadcrumb li a:hover {
   color: #fff;
 }
 
+select option:hover {
+  background-color: #96ab5c !important;
+}

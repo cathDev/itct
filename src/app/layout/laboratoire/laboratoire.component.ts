@@ -14,6 +14,7 @@ export class LaboratoireComponent implements OnInit {
   url: string = "/laboratoire";
   laboratoires : any = [];
   imagePath: string = "";
+  logoFile: any ;
   urlFile: any;
   vaccinChecked: any;
   vaccinEffectuer: any = [];
@@ -101,6 +102,8 @@ export class LaboratoireComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.urlFile = reader.result;
+      this.logoFile = reader.result;
+      console.log(this.logoFile);
     }
   }
 

@@ -45,13 +45,16 @@
         <div class="card-box">
          <!-- <h4 class="card-title">Two Column Horizontal Form</h4>
           <h4 class="card-title">Personal Information</h4>-->
-          <form action="#">
+          <ngx-spinner [fullScreen]="false" type="pacman" color="#96ab5c" size="medium">
+            <p class="loading" style="font-size: 20px; color: #96ab5c; margin-top: 30px;" translate>Please wait</p>
+          </ngx-spinner>
+          <form [formGroup]="form" (ngSubmit)="saveAppointment()">
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group row">
                   <label class="col-md-2 col-form-label">Motif du RDV</label>
                   <div class="col-md-10">
-                    <select class="select form-control">
+                    <select class="form-control" formControlName="objetAppointment">
                       <option value="test">Test</option>
                       <option value="vaccin">Vaccin</option>
                     </select>
@@ -62,17 +65,16 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Pays</label>
                   <div class="col-md-9">
-                    <select class="select form-control">
-                      <option value="male selected">Male</option>
-                      <option value="female">Female</option>
+                    <select class="form-control" formControlName="pays">
+                      <option value="Cameroun">Cameroun</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Laboratoire</label>
                   <div class="col-md-9">
-                    <select class="select form-control">
-                      <option value="male selected">Louis Pasteur</option>
+                    <select class="form-control" formControlName="laboratoire">
+                      <option [ngValue]="laboratoire.id" *ngFor="let laboratoire of labo" >{{laboratoire.name}}</option>
                     </select>
                   </div>
                 </div>
@@ -81,16 +83,16 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Ville</label>
                   <div class="col-md-9">
-                    <select class="select form-control">
-                      <option value="male selected">Douala</option>
-                      <option value="female">Bafoussam</option>
+                    <select class="form-control rounded" formControlName="ville">
+                      <option value="Douala">Douala</option>
+                      <option value="Bafoussam">Bafoussam</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Date du RDV</label>
-                  <div class="col-md-9 cal-icon">
-                    <input type="text" class="form-control datetimepicker" value="01/06/2002">
+                  <div class="col-md-9">
+                    <input type="date" class="form-control" formControlName="jour">
                   </div>
                 </div>
               </div>
@@ -101,19 +103,19 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Pays de départ</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="paysDepart">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Ville de départ</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="villeDepart">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Aéroport de départ</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="aeroportDepart">
                   </div>
                 </div>
               </div>
@@ -121,19 +123,19 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Pays d'arrivé</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="paysArrivee">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Ville d'arrivée</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="villeArrivee">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Aéroport d'arrivé</label>
                   <div class="col-md-9">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" formControlName="aeroportArrive">
                   </div>
                 </div>
               </div>
@@ -162,11 +164,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Test</td>
-                  <td>Louis Pasteur</td>
-                  <td>Douala</td>
-                  <td>31/12/2020</td>
+                <tr *ngFor="let appointment of appointments">
+                  <td>{{appointment.objetAppointment}}</td>
+                  <td>{{appointment.laboratoire.name}}</td>
+                 <!-- <td>{{appointment.ville}}</td>-->
+                  <td></td>
+                  <td>{{millisToDate(appointment.jour)}}</td>
                   <td>
                     <a>
                       <i class="fa fa-remove"></i>

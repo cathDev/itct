@@ -37,7 +37,7 @@ export class ResultatTestComponent implements OnInit {
 
   ngOnInit() {
     tools();
-    this. userConnected = this.authenticationService.getUserInLocalStorage();
+    this.userConnected = this.authenticationService.getUserInLocalStorage();
     this.labo = this.userConnected.laboratoire;
     this.patient = this.authenticationService.getPatient();
     this.allPatient();
@@ -47,13 +47,11 @@ export class ResultatTestComponent implements OnInit {
 
     console.log("voici le patient");
     console.log(this.patient);
-    this.birthday = this.millisToDate(this.patient.birthday);
+    /*this.birthday = this.millisToDate(this.patient.birthday);
     var image = 'data:image/png;base64,'+this.patient.imageSelfie;
     this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
     var imagePassport = 'data:image/png;base64,'+this.patient.imagePassport;
-    this.imagePassport = this.sanitizer.bypassSecurityTrustResourceUrl(imagePassport);
-
-
+    this.imagePassport = this.sanitizer.bypassSecurityTrustResourceUrl(imagePassport);*/
   }
 
   initForm() {
