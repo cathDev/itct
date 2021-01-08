@@ -42,7 +42,7 @@
                       <div class="col-md-6">
                         <div class="form-group form-focus select-focus">
                           <label class="focus-label">Pays</label>
-                          <select class="select form-control floating">
+                          <select class="form-control floating">
                             <option value="male selected">Male</option>
                             <option value="female">Female</option>
                           </select>
@@ -51,7 +51,7 @@
                       <div class="col-md-6">
                         <div class="form-group form-focus select-focus">
                           <label class="focus-label">Ville</label>
-                          <select class="select form-control floating">
+                          <select class="form-control floating">
                             <option value="male selected">Male</option>
                             <option value="female1">Female</option>
                           </select>
@@ -151,7 +151,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let labo of laboratoires">
-                    <td>{{labo.nom}}</td>
+                    <td>{{labo.name}}</td>
                     <td>{{labo.ville}}</td>
                   </tr>
                 </tbody>

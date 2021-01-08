@@ -15,4 +15,9 @@ export class RegisterComponent implements OnInit {
     tools();
   }
 
+  public passwordVisibility(pwd){
+    console.log("click on password");
+    pwd.type = pwd.type === 'password' ?  'text' : 'password';
+  }
+
 }

@@ -33,7 +33,7 @@ export class LaboratoireComponent implements OnInit {
     this.allVaccin();
 
     this.dropdownSettings = {
-      singleSelection: false,
+      singleSelection: true,
       idField: 'id',
       textField: 'nomVaccin',
       selectAllText: 'Sélectionner tout',
