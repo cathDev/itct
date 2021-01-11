@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ResourceService} from '../../shared/services/resource/resource.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-controleur',
@@ -13,22 +14,71 @@ export class ControleurComponent implements OnInit {
   url: string = "";
   laboratoires : any = [];
   imagePath: string = "";
-  urlFile: any;
+  urlFile: any = null;
   preleveurs: any = [];
+  form : FormGroup;
 
 
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private toastr: ToastrService,
+              private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
     this.getAllLabo();
+    this.initForm();
+  }
 
+  initForm() {
+    this.form = this.formBuilder.group({
+      birthday: ['', Validators.required],
+      email: ['', Validators.required],
+      imageSelfie: ['', Validators.required],
+      name: ['', Validators.required],
+      phone: ['', Validators.required],
+      sexe: ['', Validators.required],
+      password: ['', Validators.required],
+      username: ['', Validators.required],
+      typeControleur: ['', Validators.required],
+    });
+  }
+
+  resetForm(){
+    this.form.reset();
   }
 
   save(){
-    console.log();
+    this.spinner.hide();
+    console.log(this.form.value);
+    var imageId = new String("");
+    if(this.urlFile != null) imageId = this.urlFile.split(",")[1];
+
+    var controleur = {
+      birthday: this.form.get("birthday").value,
+      email: this.form.get("email").value,
+      imageSelfie: imageId,
+      name: this.form.get("name").value,
+      phone: this.form.get("phone").value,
+      sexe: this.form.get("sexe").value,
+      password: this.form.get("password").value,
+      username: this.form.get("username").value,
+      typeControleur: this.form.get("typeControleur").value,
+      role: "CONTROLEUR",
+    };
+    console.log("nombre de caractère de l'image "+imageId.length);
+    this.resourceService.resourceForLogin("/client/auth/register", controleur)
+      .subscribe(res => {
+          this.spinner.hide();
+          this.form.reset();
+          this.toastr.success("Votre compte a été enregistré avec succès.");
+        },
+        error => {
+          this.spinner.hide();
+          this.toastr.error("Une erreur est survenue, reéssayez plus tard.");
+          console.log(error);
+        });
+
   }
 
   getAllLabo(){
@@ -60,6 +110,5 @@ export class ControleurComponent implements OnInit {
       this.urlFile = reader.result;
     }
   }
-
 
 }

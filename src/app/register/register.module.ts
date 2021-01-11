@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {RegisterComponent} from './register.component';
 import {RegisterRoutingModule} from './register-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -10,7 +11,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     RegisterRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule
   ]
 })
 export class RegisterModule { }

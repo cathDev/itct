@@ -3,6 +3,7 @@ import {ToastrService} from 'ngx-toastr';
 import {FormBuilder} from '@angular/forms';
 import {ResourceService} from '../../shared/services/resource/resource.service';
 import * as CanvasJS from '../../../assets/js/canvasjs.min';
+import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
 
 declare function charts();
 
@@ -14,11 +15,12 @@ declare function charts();
 export class DashboardComponent implements OnInit {
 
   laboratoires : any = [];
-
+  user = this.authenticationService.getUserInLocalStorage();
   constructor(
               private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private toastr: ToastrService,
+              private authenticationService : AuthenticationService,
               ) { }
 
   ngOnInit() {

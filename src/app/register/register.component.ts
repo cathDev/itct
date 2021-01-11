@@ -161,18 +161,24 @@ export class RegisterComponent implements OnInit {
     };
 
     console.log(this.registerForm.value);
-
-    /*this.resourceService.resourceForLogin("/client/auth/register", patient)
+    var result;
+    this.resourceService.resourceForLogin("/client/auth/register", patient)
       .subscribe(res => {
-          this.spinner.hide();
-          this.registerForm.reset();
-          this.toastr.success("Votre compte a été enregistré avec succès.");
+          result =  res;
+          if(result.error_message == "Username Already Used"){
+            this.toastr.error("Ce nom d'utilisateur existe déjà.");
+          }
+          else {
+            this.spinner.hide();
+            this.registerForm.reset();
+            this.toastr.success("Votre compte a été enregistré avec succès.");
+          }
         },
         error => {
           this.spinner.hide();
           this.toastr.error("Une erreur est survenue, reéssayez plus tard.");
           console.log(error);
-        });*/
+        });
   }
 
   public passwordVisibility(pwd){
