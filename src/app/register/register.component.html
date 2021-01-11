@@ -2,38 +2,41 @@
   <div class="account-page">
     <div class="account-center">
       <div class="account-box">
-        <form action="http://dreamguys.co.in/preclinic/template/index.html" class="form-signin">
+        <form [formGroup]="registerForm" (ngSubmit)="register()" class="form-signin">
           <div class="account-logo">
             <a href="#"><img src="assets/img/logo_meduim.jpeg" alt="Awaycovid"></a>
           </div>
           <div class="col-md-12">
             <div class="form-group form-focus">
               <label class="focus-label">Nom et prénom</label>
-              <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
+              <input type="text" class="form-control floating" formControlName="name" value="" style="margin-top: 10px;">
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group form-focus">
               <label class="focus-label">Date de naissance</label>
-              <input type="text" class="form-control floating" value="" style="margin-top: 10px;" onfocus="(this.type='date')">
+              <input type="text" class="form-control floating" value="" style="margin-top: 10px;" formControlName="birthday" onfocus="(this.type='date')">
             </div>
           </div>
           <div class="col-md-12">
-            <div class="form-group form-focus">
+            <div class="form-group form-focus select-focus">
               <label class="focus-label">Sexe</label>
-              <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
+              <select class="form-control floating" formControlName="sexe">
+                <option value="MASCULIN">Masculin</option>
+                <option value="FEMININ">Féminin</option>
+              </select>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group form-focus">
               <label class="focus-label">Nom d'utilisateur</label>
-              <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
+              <input type="text" class="form-control floating" value="" formControlName="username" style="margin-top: 10px;">
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group form-focus">
               <label class="focus-label">Email</label>
-              <input type="email" class="form-control floating" value="" style="margin-top: 10px;">
+              <input type="email" class="form-control floating" formControlName="email" value="" style="margin-top: 10px;" autocomplete="false">
             </div>
           </div>
           <div class="col-md-12">
@@ -41,7 +44,7 @@
               <label class="focus-label">Mot de passe</label>
               <!--<input type="text" class="form-control floating" value="" style="margin-top: 10px;">-->
               <div class="input-group mb-3">
-                <input type="password" class="form-control floating" #pwd style="margin-top: 10px;">
+                <input type="password" class="form-control floating" #pwd formControlName="password" style="margin-top: 10px;" autocomplete="false">
                 <div class="input-group-append" style="margin-top: 10px; height: 50px;">
                   <span class="input-group-text fa fa-eye"  (click)="passwordVisibility(pwd)" *ngIf="pwd.type == 'password'"></span>
                   <span class="input-group-text fa fa-eye-slash" (click)="passwordVisibility(pwd)" *ngIf="pwd.type == 'text'"></span>
@@ -52,57 +55,76 @@
           <div class="col-md-12">
             <div class="form-group form-focus select-focus">
               <label class="focus-label">Pays</label>
-              <select class="form-control floating">
-                <option value="male selected">Male</option>
-                <option value="female1">Female</option>
+              <select class="form-control floating" formControlName="pays" (change)="getDialCode($event)" >
+                <option *ngFor="let country of pays" [ngValue]="country.alpha3Code">{{country.name}}</option>
               </select>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group form-focus select-focus">
               <label class="focus-label">Ville</label>
-              <select class="form-control floating">
-                <option value="male selected">Male</option>
-                <option value="female1">Female</option>
+              <select class="form-control floating" formControlName="ville">
+                <option value="Douala">Douala</option>
+                <option value="Yaounde">Yaoundé</option>
               </select>
             </div>
           </div>
-          <div class="col-md-12">
-            <div class="form-group form-focus">
-              <label class="focus-label">Téléphone</label>
-              <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
+          <div class="col-md-12 row">
+            <div class="form-group form-focus col-md-3">
+              <label class="focus-label"></label>
+              <input type="text" class="form-control " value="{{dialCode}}" readonly style="margin-top: 10px; border-top: none;border-left: none;border-right:none; background-color: white">
+            </div>
+            <div class="form-group form-focus col-md-9">
+              <label class="focus-label" style="margin-left: 10px;">Téléphone</label>
+              <input type="text" class="form-control floating" value="" formControlName="phone" style="margin-top: 10px; margin-right: 0px;padding-right: 0px;">
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group form-focus">
               <label class="focus-label">Numéro de passeport</label>
-              <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
+              <input type="text" class="form-control floating" value="" formControlName="numeroPassport" style="margin-top: 10px;">
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group form-focus">
               <label class="focus-label">Date expiration</label>
-              <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
+              <input type="text" class="form-control floating" value="" formControlName="dateExpiration" onfocus="(this.type='date')" style="margin-top: 10px;">
             </div>
           </div>
           <div class="col-md-12">
-            <div class="form-group form-focus">
+            <div class="form-group form-focus select-focus">
               <label class="focus-label">Type de passeport</label>
-              <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
+              <select class="form-control floating" formControlName="typePassport">
+                <option [ngValue]="type.id" *ngFor="let type of passportType">{{type.label}}</option>
+              </select>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group form-focus">
               <label class="focus-label">Photo du passeport</label>
-              <input type="file" class="form-control floating" value="" style="margin-top: 10px;">
+              <input type="file" class="form-control floating" value="" (change)="onFileChanged($event)" formControlName="imagePassport" style="margin-top: 10px;">
             </div>
           </div>
+          <div class="col-md-12 row">
+            <a class="chat-img-attach"   *ngIf="urlPassportImage != null">
+              <img width="182" height="137" alt="image du passeport" [src]="urlPassportImage">
+              <!--<div class="chat-placeholder">
+                <div class="chat-img-name">image du passeport</div>
+              </div>-->
+            </a>
+          </div>
+
           <div class="col-md-12">
             <div class="form-group form-focus">
               <label class="focus-label">Photo de profil</label>
-              <input type="file" class="form-control floating" value="" style="margin-top: 10px;">
+              <input type="file" class="form-control floating" value="" formControlName="imageSelfie" (change)="uploadImageProfil($event)" style="margin-top: 10px;">
             </div>
           </div>
+            <div class="account-logo">
+              <a href="#">
+                <img alt="Photo de profil" [src]="urlProfilImage" class="img-fluid rounded-circle" *ngIf="urlProfilImage != null">
+              </a>
+            </div>
           <div class="form-group text-center">
             <button class="btn btn-primary account-btn" type="submit">Signup</button>
           </div>
