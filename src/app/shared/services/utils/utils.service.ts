@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class UtilsService {
 
   patient: any = {};
-  public defaultLang : string = 'en';
+  appointment: any = {};
 
   constructor() { }
 
@@ -17,12 +17,12 @@ export class UtilsService {
   public setPatient(obj){
     this.patient = obj;
   }
-
-  public getLang(){
-    return this.defaultLang;
+  public getAppointment(){
+    return this.appointment;
   }
 
-  public setLang(lang){
-    this.defaultLang = lang;
+  public setAppointment(obj){
+    this.appointment = obj;
   }
+
 }

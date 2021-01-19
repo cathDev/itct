@@ -23,6 +23,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import { ValidationTestComponent } from './validation-test/validation-test.component';
 import { PreleveurComponent } from './preleveur/preleveur.component';
 import { ControleurComponent } from './controleur/controleur.component';
+import {FilterPipe} from '../shared/pipe/filter-pipe';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ControleurComponent } from './controleur/controleur.component';
     MesResultatsComponent,
     ValidationTestComponent,
     PreleveurComponent,
-    ControleurComponent
+    ControleurComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,

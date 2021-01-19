@@ -4,6 +4,7 @@ import {ResourceService} from '../../shared/services/resource/resource.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {ToastrService} from 'ngx-toastr';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
+import * as CanvasJS from '../../../assets/js/canvasjs.min';
 
 declare function tools(): any;
 
@@ -15,6 +16,7 @@ declare function tools(): any;
 export class TestComponent implements OnInit {
 
   appointments : any = [];
+  objetAppointments : any = [];
   labo : any = [];
 
   form: FormGroup;
@@ -37,12 +39,14 @@ export class TestComponent implements OnInit {
 
     this.allAppointment();
     this.allLabo();
+    this.objectAppointment();
     this.initForm();
   }
 
   initForm() {
     this.form = this.formBuilder.group({
       jour: ['', Validators.required],
+      plageHoraire: ['', Validators.required],
       laboratoire: ['', Validators.required],
       objetAppointment: ['', Validators.required],
       patient: ['', Validators.required],
@@ -55,10 +59,6 @@ export class TestComponent implements OnInit {
       aeroportDepart: ['', Validators.required],
       aeroportArrive: ['', Validators.required],
     });
-  }
-
-  public resetForm(){
-
   }
 
   public allAppointment(){
@@ -89,24 +89,23 @@ export class TestComponent implements OnInit {
     console.log(this.form.value);
      var appointment = {
       jour: this.form.get("jour").value,
+       plageHoraire: this.form.get("plageHoraire").value,
       laboratoire: {
         id: this.form.get("laboratoire").value
       },
-      objetAppointment: this.form.get("objetAppointment").value,
-      patient: {
-        id: this.patient.id
+      objetAppointment: {
+        id: this.form.get("objetAppointment").value
       },
       paysArrivee: this.form.get("paysArrivee").value,
       paysDepart: this.form.get("paysDepart").value,
       villeArrivee: this.form.get("villeArrivee").value,
-      villeDepart: this.form.get("villeDepart").value,
-       aeroportDepart: this.form.get("aeroportDepart").value,
-       aeroportArrive: this.form.get("aeroportArrive").value
+      villeDepart: this.form.get("villeDepart").value
     };
     console.log(appointment);
     this.resourceService.saveResource(this.url+"/save", appointment)
       .subscribe(res => {
           this.spinner.hide();
+          this.form.reset();
           resultat = res;
           this.toast.success("Opération effectuée avec succès");
           console.log(resultat);
@@ -126,6 +125,21 @@ export class TestComponent implements OnInit {
     const year = dateObj.getFullYear();
     const output = day + '-'+month+'-'+year;
     return output;
+  }
+
+  public objectAppointment(){
+    this.resourceService.getResources("/client/objetAppointment/all")
+      .subscribe(res => {
+          this.objetAppointments = res;
+          console.log(this.objetAppointments);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  public cancelAppointment(event){
+    event.preventDefault();
   }
 
 }

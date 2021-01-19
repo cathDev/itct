@@ -2,35 +2,6 @@
 <div class="page-wrapper">
   <div class="content">
     <!--<div class="row">
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
-        <div class="dash-widget">
-          <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-          <div class="dash-widget-info text-right">
-            <h3>{{tests.length}}</h3>
-            <span class="widget-title1">Tests <i class="fa fa-check" aria-hidden="true"></i></span>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
-        <div class="dash-widget">
-          <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
-          <div class="dash-widget-info text-right">
-            <h3>72</h3>
-            <span class="widget-title3">Tâches <i class="fa fa-check" aria-hidden="true"></i></span>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
-        <div class="dash-widget">
-          <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
-          <div class="dash-widget-info text-right">
-            <h3>618</h3>
-            <span class="widget-title4">Notification <i class="fa fa-check" aria-hidden="true"></i></span>
-          </div>
-        </div>
-      </div>
-    </div>-->
-    <!--<div class="row">
       <div class="search-box">
         <div class="input-group input-group-md" style="margin-left: 15px; background-color: #fafafa;">
           <input type="text" class="form-control" placeholder="identifiant du patient" name="search">
@@ -50,14 +21,22 @@
           </ngx-spinner>
           <form [formGroup]="form" (ngSubmit)="saveAppointment()">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group row">
-                  <label class="col-md-2 col-form-label">Motif du RDV</label>
-                  <div class="col-md-10">
+                  <label class="col-md-3 col-form-label">Motif du RDV</label>
+                  <div class="col-md-9">
                     <select class="form-control" formControlName="objetAppointment">
-                      <option value="test">Test</option>
-                      <option value="vaccin">Vaccin</option>
+                      <option [ngValue]="obj.id" *ngFor=" let obj of objetAppointments">{{obj.label}}</option>
+                      <!--<option value="vaccin">Vaccin</option>-->
                     </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-3 col-form-label">Heure du RDV</label>
+                  <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="HH:mm" formControlName="plageHoraire">
                   </div>
                 </div>
               </div>
@@ -112,12 +91,12 @@
                     <input type="text" class="form-control" formControlName="villeDepart">
                   </div>
                 </div>
-                <div class="form-group row">
+               <!-- <div class="form-group row">
                   <label class="col-md-3 col-form-label">Aéroport de départ</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control" formControlName="aeroportDepart">
                   </div>
-                </div>
+                </div>-->
               </div>
               <div class="col-md-6">
                 <div class="form-group row">
@@ -132,12 +111,12 @@
                     <input type="text" class="form-control" formControlName="villeArrivee">
                   </div>
                 </div>
-                <div class="form-group row">
+                <!--<div class="form-group row">
                   <label class="col-md-3 col-form-label">Aéroport d'arrivé</label>
                   <div class="col-md-9">
                     <input type="text" class="form-control" formControlName="aeroportArrive">
                   </div>
-                </div>
+                </div>-->
               </div>
             </div>
             <div class="text-right">
@@ -165,13 +144,13 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let appointment of appointments">
-                  <td>{{appointment.objetAppointment}}</td>
+                  <td>{{appointment.objetAppointment.label}}</td>
                   <td>{{appointment.laboratoire.name}}</td>
                  <!-- <td>{{appointment.ville}}</td>-->
                   <td></td>
                   <td>{{millisToDate(appointment.jour)}}</td>
                   <td>
-                    <a>
+                    <a href="" title="Annuler le RDV" (click)="cancelAppointment($event)">
                       <i class="fa fa-remove"></i>
                     </a>
                   </td>

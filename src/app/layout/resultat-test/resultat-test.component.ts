@@ -5,6 +5,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {ToastrService} from 'ngx-toastr';
+import {UtilsService} from '../../shared/services/utils/utils.service';
 
 declare function tools(): any;
 
@@ -28,9 +29,11 @@ export class ResultatTestComponent implements OnInit {
 
   form: FormGroup;
   patient : any = {};
+  appointment : any = {};
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private authenticationService: AuthenticationService,
+              private utilsService: UtilsService,
               private spinner: NgxSpinnerService,
               private toast: ToastrService,
               private sanitizer:DomSanitizer) { }
@@ -39,19 +42,17 @@ export class ResultatTestComponent implements OnInit {
     tools();
     this.userConnected = this.authenticationService.getUserInLocalStorage();
     this.labo = this.userConnected.laboratoire;
-    this.patient = this.authenticationService.getPatient();
+
+    this.patient = this.utilsService.getPatient();
+    this.appointment = this.utilsService.getAppointment();
+    /*this.patient = this.utilsService.getPatient();*/
     this.allPatient();
-    this.allTest();
+    /*this.allTest();*/
     this.allRDV();
     this.initForm();
 
     console.log("voici le patient");
     console.log(this.patient);
-    /*this.birthday = this.millisToDate(this.patient.birthday);
-    var image = 'data:image/png;base64,'+this.patient.imageSelfie;
-    this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
-    var imagePassport = 'data:image/png;base64,'+this.patient.imagePassport;
-    this.imagePassport = this.sanitizer.bypassSecurityTrustResourceUrl(imagePassport);*/
   }
 
   initForm() {
@@ -68,11 +69,9 @@ export class ResultatTestComponent implements OnInit {
     var image;
     var imagePassport;
     var result;
-    /*let params = new HttpParams().set('identifiant', this.search);*/
     this.resourceService.getResourcesById(this.url+"/search", this.search)
       .subscribe(res => {
           result = res;
-          /* if()*/
           this.patient = res;
           console.log(this.patient);
           /*this.birthday = this.millisToDate(this.patient.birthday);
@@ -88,17 +87,10 @@ export class ResultatTestComponent implements OnInit {
   }
 
   public allPatient(){
-    var image;
     this.resourceService.getResources(this.url+"/all")
       .subscribe(res => {
           this.patients = res;
           console.log(this.patients);
-          /*this.patient = this.patients[0];
-          this.birthday = this.millisToDate(this.patient.birthday);
-          image = 'data:image/png;base64,'+this.patient.imageSelfie;
-          this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
-          console.log(this.patients);
-          console.log(this.patient);*/
         },
         error => {
           console.log(error);
@@ -144,18 +136,30 @@ export class ResultatTestComponent implements OnInit {
     this.spinner.show();
     console.log(this.form.value);
     var test = {
-      laboratoire: {
-        id:this.labo.id
+      "commentaire": this.form.get("testCommentaire").value,
+      "done": this.appointment.done,
+      "jour": this.appointment.jour,
+      "laboratoire": {
+        "id": this.appointment.laboratoire.id,
       },
-      commentaire: this.form.get("testCommentaire").value,
-      patient: {
-        id: this.patient.id
+      "objetAppointment": {
+        "id": this.appointment.objetAppointment.id,
+        "label": this.appointment.objetAppointment.label
       },
-      testIGG: this.form.get("igg").value,
-      testIGM: this.form.get("igm").value
+      "patient": {
+        "id": this.appointment.patient.id
+      },
+      "paysArrivee": this.appointment.paysArrivee,
+      "paysDepart": this.appointment.paysDepart,
+      "plageHoraire": this.appointment.plageHoraire,
+      "testIGG": this.form.get("igg").value,
+      "testIGM": this.form.get("igm").value,
+      "vaccin": this.appointment.vaccin,
+      "villeArrivee": this.appointment.villeArrivee,
+      "villeDepart": this.appointment.villeDepart
     };
 
-    this.resourceService.saveResource("/client/test/save", test)
+    this.resourceService.saveResource("/client/appointment/update/"+this.appointment.id, test)
       .subscribe(res => {
         console.log(res);
         console.log("le test est bien enregistrer");

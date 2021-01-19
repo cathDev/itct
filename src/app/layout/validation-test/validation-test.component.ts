@@ -39,7 +39,7 @@ export class ValidationTestComponent implements OnInit {
     this. userConnected = this.authenticationService.getUserInLocalStorage();
     this.labo = this.userConnected.laboratoire;
     this.allPatient();
-    this.allTest();
+   /* this.allTest();*/
     this.allRDV();
   }
 
@@ -49,7 +49,6 @@ export class ValidationTestComponent implements OnInit {
     this.resourceService.getResourcesById(this.url+"/search", this.search)
       .subscribe(res => {
           result = res;
-          /* if()*/
           this.patient = res;
           this.birthday = this.millisToDate(this.patient.birthday);
           image = 'data:image/png;base64,'+this.patient.imageSelfie;
@@ -62,17 +61,10 @@ export class ValidationTestComponent implements OnInit {
   }
 
   public allPatient(){
-    var image;
     this.resourceService.getResources(this.url+"/all")
       .subscribe(res => {
           this.patients = res;
           console.log(this.patients);
-          /*this.patient = this.patients[0];
-          this.birthday = this.millisToDate(this.patient.birthday);
-          image = 'data:image/png;base64,'+this.patient.imageSelfie;
-          this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
-          console.log(this.patients);
-          console.log(this.patient);*/
         },
         error => {
           console.log(error);

@@ -30,15 +30,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let test of tests">
-                  <td>{{test.laboratoire.name}}</td>
-                  <td>{{millisToDate(test.dateTest)}}</td>
-                  <td>{{test.commentaire}}</td>
-                  <td>
+                <tr *ngFor="let test of appointments">
+                  <td *ngIf="test.objetAppointment.label == 'TEST COVID'">{{test.laboratoire.name}}</td>
+                  <td *ngIf="test.objetAppointment.label == 'TEST COVID'">{{millisToDate(test.jour)}}</td>
+                  <td *ngIf="test.objetAppointment.label == 'TEST COVID'">{{test.commentaire}}</td>
+                  <td *ngIf="test.objetAppointment.label == 'TEST COVID'">
                     <span *ngIf="test.testIGG == true">Positif</span>
                     <span *ngIf="test.testIGG == false">Négatif</span>
                   </td>
-                  <td>
+                  <td *ngIf="test.objetAppointment.label == 'TEST COVID'">
                     <span *ngIf="test.testIGM == true">Positif</span>
                     <span *ngIf="test.testIGM == false">Négatif</span>
                   </td>
@@ -62,14 +62,16 @@
                 <tr>
                   <th>Laboratoire</th>
                   <th>Date</th>
-                  <th>Vaccin</th>
+                 <!-- <th>Vaccin</th>-->
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let vaccin of vaccins">
-                  <td>{{vaccin.laboratoire.name}}</td>
-                  <td>{{millisToDate(vaccin.dateVaccin)}}</td>
-                  <td>{{vaccin.vaccin.nomVaccin}}</td>
+                <tr *ngFor="let vaccin of appointments">
+                  <td *ngIf="vaccin.objetAppointment.label == 'VACCIN'">{{vaccin.laboratoire.name}}</td>
+                  <td *ngIf="vaccin.objetAppointment.label == 'VACCIN'">{{millisToDate(vaccin.jour)}}</td>
+                 <!-- <td>
+                    <div *ngFor="let vac of vaccin.vaccins">{{vac.nomVaccin}}</div>
+                  </td>-->
                 </tr>
                 </tbody>
               </table>

@@ -4,6 +4,7 @@ import {ResourceService} from '../../shared/services/resource/resource.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
+import {UtilsService} from '../../shared/services/utils/utils.service';
 
 
 @Component({
@@ -15,24 +16,50 @@ export class AppointmentsComponent implements OnInit {
 
   url: string = "/client/appointment";
   appointments : any = [];
+  filterAppointments : any = [];
+  appointmentsAll : any = [];
   search: string = "";
   image : any;
+  user : any;
+  userRole : any;
 
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private router : Router,
+              private utilsService : UtilsService,
               private authenticationService : AuthenticationService,
               private sanitizer:DomSanitizer) { }
 
 
   ngOnInit() {
+    this.user = this.authenticationService.getUserInLocalStorage();
+    this.userRole = this.user.role;
     this.allAppointments();
   }
 
   public allAppointments(){
+    var result;
+    var testPreleve = [];
+    var testNonPreleve = [];
     this.resourceService.getResources(this.url+"/all")
       .subscribe(res => {
-          this.appointments = res;
+          result = res;
+          result.forEach(appointment => {
+            if(appointment.objetAppointment.label.toLowerCase() == "test covid" && appointment.done == false){
+              testNonPreleve.push(appointment);
+            }
+            else {
+              testPreleve.push(appointment);
+            }
+          });
+          if(this.userRole.toLowerCase() == "preleveur"){
+            this.appointments = testNonPreleve;
+          }
+          else {
+            this.appointments = testPreleve;
+          }
+
+          this.appointmentsAll = this.appointments;
           console.log(this.appointments);
         },
         error => {
@@ -58,17 +85,47 @@ export class AppointmentsComponent implements OnInit {
 
   public validateTestOrVaccin(obj, event){
     event.preventDefault();
-    this.authenticationService.setPatient(obj.patient);
-    this.router.navigateByUrl("/resultat-test");
-    /*if(obj.objetAppointment == ""){
-      this.router.navigateByUrl("/resultat-test");
+    var motif : any = obj.objetAppointment;
+    this.utilsService.setPatient(obj.patient);
+    this.utilsService.setAppointment(obj);
+    /*this.router.navigateByUrl("/resultat-test");*/
+    if((motif.label).toLowerCase() == "test covid"){
+      if(obj.done == false){
+        this.router.navigateByUrl("/valider-test");
+      }
+      else{
+        this.router.navigateByUrl("/resultat-test");
+      }
     }
-    else if(obj.objetAppointment == ""){
+    else if((motif.label).toLowerCase() == "vaccin"){
       this.router.navigateByUrl("/resultat-vaccin");
-    }*/
+    }
 
     console.log("j'ai cliqué sur un rendez vous");
-    console.log(this.authenticationService.getPatient());
+    console.log(this.utilsService.getPatient());
+    console.log("j'ai cliqué sur un rendez vous");
+    console.log(this.utilsService.getAppointment());
+  }
+
+  public searchAppointment(){
+    console.log("Hello");
+    console.log(this.search);
+    var filterTabs = [];
+    this.appointments.filter(elt => {
+      if(elt["jour"] == (this.dateToInt(this.search))){
+        filterTabs.push(elt);
+      }
+    });
+    this.appointments = filterTabs;
+  }
+
+  public dateToInt(date){
+    return new Date(date).getTime();
+  }
+
+  public refreshPage(){
+    this.appointments = this.appointmentsAll;
+    this.search = "";
   }
 
 }

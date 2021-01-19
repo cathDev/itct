@@ -15,6 +15,7 @@ export class MesResultatsComponent implements OnInit {
   userConnected : any = {};
   patient : any = {};
   tests: any = [];
+  appointments: any = [];
   vaccins: any = [];
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
@@ -25,8 +26,9 @@ export class MesResultatsComponent implements OnInit {
   ngOnInit() {
     this. userConnected = this.authenticationService.getUserInLocalStorage();
     this.patient = this.userConnected.patient;
-    this.allTest();
-    this.allVaccin();
+    /*this.allTest();
+    this.allVaccin();*/
+    this.allAppointments();
   }
 
   public allTest(){
@@ -51,8 +53,18 @@ export class MesResultatsComponent implements OnInit {
         });
   }
 
+  public allAppointments(){
+    this.resourceService.getResources("/client/appointment/patient")
+      .subscribe(res => {
+          this.appointments = res;
+          console.log(this.appointments);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
   public millisToDate(millis){
-    console.log(new Date(millis));
     const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
       "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
     const dateObj = new Date(millis);
@@ -60,8 +72,11 @@ export class MesResultatsComponent implements OnInit {
     const day = String(dateObj.getDate()).padStart(2, '0');
     const year = dateObj.getFullYear();
     const output = day + '-'+month+'-'+year;
-    console.log(output);
     return output;
+  }
+
+  public tableLength( tab: any[]){
+    return tab.length;
   }
 
 }

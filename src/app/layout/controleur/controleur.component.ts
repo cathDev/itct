@@ -78,7 +78,6 @@ export class ControleurComponent implements OnInit {
           this.toastr.error("Une erreur est survenue, reéssayez plus tard.");
           console.log(error);
         });
-
   }
 
   getAllLabo(){
@@ -94,6 +93,7 @@ export class ControleurComponent implements OnInit {
 
   onFileChanged(event) {
     const files = event.target.files;
+    console.log(files);
     if (files.length === 0)
       return;
 
