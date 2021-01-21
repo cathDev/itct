@@ -5,6 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ResourceService} from '../../shared/services/resource/resource.service';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
+import {UtilsService} from '../../shared/services/utils/utils.service';
 
 declare function tools(): any;
 
@@ -17,6 +18,7 @@ export class ValidationTestComponent implements OnInit {
 
   url: string = "/client/patient";
   patient : any = {};
+  appointment : any = {};
   patients : any = [];
   tests : any = [];
   rdv : any = [];
@@ -30,7 +32,8 @@ export class ValidationTestComponent implements OnInit {
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private authenticationService: AuthenticationService,
-              private toastr: ToastrService,
+              private utilsService: UtilsService,
+              private toast: ToastrService,
               private spinner: NgxSpinnerService,
               private sanitizer:DomSanitizer) { }
 
@@ -38,9 +41,16 @@ export class ValidationTestComponent implements OnInit {
     tools();
     this. userConnected = this.authenticationService.getUserInLocalStorage();
     this.labo = this.userConnected.laboratoire;
+
+    this.patient = this.utilsService.getPatient();
+    this.birthday = this.millisToDate(this.patient.birthday);
+    var image;
+    image = 'data:image/png;base64,'+this.patient.imageSelfie;
+    this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
+    this.appointment = this.utilsService.getAppointment();
     this.allPatient();
    /* this.allTest();*/
-    this.allRDV();
+    /*this.allRDV();*/
   }
 
   public searchPatient(){
@@ -94,7 +104,6 @@ export class ValidationTestComponent implements OnInit {
   }
 
   public millisToDate(millis){
-    console.log(new Date(millis));
     const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
       "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
     const dateObj = new Date(millis);
@@ -102,34 +111,28 @@ export class ValidationTestComponent implements OnInit {
     const day = String(dateObj.getDate()).padStart(2, '0');
     const year = dateObj.getFullYear();
     const output = day + '-'+month+'-'+year;
-    console.log(output);
     return output;
   }
 
-  saveVaccin(){
+  saveTest(){
     this.spinner.show();
-    var test = {
-      laboratoire: {
-        id:this.labo.id
-      },
-      patient: {
-        identifiant: this.patient.identifiant
-      },
-      status: true,
-    };
-
-    console.log("voici la valeur du check box", this.soins);
-    /*this.resourceService.saveResource("/client/vaccinate/save", test)
+    var result;
+    this.resourceService.saveResource("/client/appointment/preleveur/update/"+this.appointment.id, null)
       .subscribe(res => {
           this.spinner.hide();
-          this.toastr.success("Opération effectuée avec succès.");
-          console.log("opération reussi");
+          console.log(res);
+          result = res;
+          console.log("le test est bien enregistrer");
+          this.patient = {};
+          this.soins = false;
+          this.toast.success(result.message + ".");
         },
         error => {
+          console.log("le test n'est pas bien enregistrer");
           this.spinner.hide();
-          this.toastr.error("Une erreur est survenue, reéssayez plus tard.");
+          this.toast.error("Une erreur est survenue, reéssayez plus tard.");
           console.log(error);
-        });*/
+        });
   }
 
 }

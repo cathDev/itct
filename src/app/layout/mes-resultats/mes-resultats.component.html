@@ -30,7 +30,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let test of appointments">
+                <tr *ngFor="let test of appointments | paginate: { itemsPerPage: items, currentPage: p}; let i=index">
                   <td *ngIf="test.objetAppointment.label == 'TEST COVID'">{{test.laboratoire.name}}</td>
                   <td *ngIf="test.objetAppointment.label == 'TEST COVID'">{{millisToDate(test.jour)}}</td>
                   <td *ngIf="test.objetAppointment.label == 'TEST COVID'">{{test.commentaire}}</td>
@@ -45,6 +45,15 @@
                 </tr>
                 </tbody>
               </table>
+              <ul class="pagination" style="margin-top: 20px;">
+                <pagination-controls (pageChange)="p = $event"
+                                     responsive="true"
+                                     previousLabel="Précédent"
+                                     nextLabel="Suivant"
+                >
+
+                </pagination-controls>
+              </ul>
             </div>
           </div>
         </div>
@@ -66,7 +75,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let vaccin of appointments">
+                <tr *ngFor="let vaccin of appointments | paginate: { itemsPerPage: items, currentPage: pV}; let i=index">
                   <td *ngIf="vaccin.objetAppointment.label == 'VACCIN'">{{vaccin.laboratoire.name}}</td>
                   <td *ngIf="vaccin.objetAppointment.label == 'VACCIN'">{{millisToDate(vaccin.jour)}}</td>
                  <!-- <td>
@@ -75,6 +84,15 @@
                 </tr>
                 </tbody>
               </table>
+              <ul class="pagination" style="margin-top: 20px;">
+                <pagination-controls (pageChange)="pV = $event"
+                                     responsive="true"
+                                     previousLabel="Précédent"
+                                     nextLabel="Suivant"
+                >
+
+                </pagination-controls>
+              </ul>
             </div>
           </div>
         </div>

@@ -17,6 +17,11 @@ export class MesResultatsComponent implements OnInit {
   tests: any = [];
   appointments: any = [];
   vaccins: any = [];
+
+  p: number = 1;
+  pV: number = 1;
+  items: number = 8;
+
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private authenticationService: AuthenticationService,

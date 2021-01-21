@@ -44,8 +44,8 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Pays</label>
                   <div class="col-md-9">
-                    <select class="form-control" formControlName="pays">
-                      <option value="Cameroun">Cameroun</option>
+                    <select class="form-control" formControlName="pays" (change)="allCitiesByCountry()">
+                      <option [ngValue]="pays.id" *ngFor="let pays of country">{{pays.label}}</option>
                     </select>
                   </div>
                 </div>
@@ -62,9 +62,8 @@
                 <div class="form-group row">
                   <label class="col-md-3 col-form-label">Ville</label>
                   <div class="col-md-9">
-                    <select class="form-control rounded" formControlName="ville">
-                      <option value="Douala">Douala</option>
-                      <option value="Bafoussam">Bafoussam</option>
+                    <select class="form-control rounded" formControlName="ville" (change)="allLabo()">
+                      <option [ngValue]="city.id" *ngFor="let city of cities">{{city.label}}</option>
                     </select>
                   </div>
                 </div>
@@ -143,7 +142,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let appointment of appointments">
+                <tr *ngFor="let appointment of appointments | paginate: { itemsPerPage: items, currentPage: p}; let i=index">
                   <td>{{appointment.objetAppointment.label}}</td>
                   <td>{{appointment.laboratoire.name}}</td>
                  <!-- <td>{{appointment.ville}}</td>-->
@@ -157,6 +156,15 @@
                 </tr>
                 </tbody>
               </table>
+              <ul class="pagination" style="margin-top: 20px;">
+                <pagination-controls (pageChange)="p = $event"
+                                     responsive="true"
+                                     previousLabel="Précédent"
+                                     nextLabel="Suivant"
+                >
+
+                </pagination-controls>
+              </ul>
             </div>
           </div>
         </div>

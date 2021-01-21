@@ -108,7 +108,7 @@
               </div>
             </div>
             <div class="text-right">
-              <button type="submit" class="btn btn-primary-one">Envoyer</button>
+              <button type="submit" class="btn btn-primary-one" [disabled]="((patient | json) == '{}')">Envoyer</button>
             </div>
           </form>
         </div>

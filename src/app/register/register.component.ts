@@ -41,6 +41,9 @@ export class RegisterComponent implements OnInit {
   pays : any = [];
   countryObject : any = {};
   dialCode: any;
+  step1 : number = 1;
+  step2 : number = 0;
+  step3 : number = 0;
 
   constructor(
     private authenticationService : AuthenticationService,
@@ -56,6 +59,24 @@ export class RegisterComponent implements OnInit {
     tools();
     this.initRegisterForm();
     this.allCountry();
+  }
+
+  enableStep1(){
+    this.step1 = 1;
+    this.step2 = 0;
+    this.step3 = 0;
+  }
+
+  enableStep2(){
+    this.step1 = 0;
+    this.step2 = 1;
+    this.step3 = 0;
+  }
+
+  enableStep3(){
+    this.step1 = 0;
+    this.step2 = 0;
+    this.step3 = 1;
   }
 
   initRegisterForm() {

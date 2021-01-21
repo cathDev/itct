@@ -21,6 +21,9 @@ export class LaboratoireComponent implements OnInit {
   vaccins: any = [];
   dropdownSettings = {};
 
+  p: number = 1;
+  items: number = 8;
+
 
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,

@@ -18,11 +18,16 @@ export class TestComponent implements OnInit {
   appointments : any = [];
   objetAppointments : any = [];
   labo : any = [];
+  country : any = [];
+  cities : any = [];
 
   form: FormGroup;
   url: string = "/client/appointment";
   userConnected : any = {};
   patient : any = {};
+
+  p: number = 1;
+  items: number = 8;
 
   constructor(
               private formBuilder : FormBuilder,
@@ -38,7 +43,8 @@ export class TestComponent implements OnInit {
     this.patient = this.userConnected.patient;
 
     this.allAppointment();
-    this.allLabo();
+    /*this.allLabo();*/
+    this.allCountry();
     this.objectAppointment();
     this.initForm();
   }
@@ -73,10 +79,32 @@ export class TestComponent implements OnInit {
   }
 
   public allLabo(){
-    this.resourceService.getResources("/laboratoire/all")
+    this.resourceService.getResources("/laboratoire/city/"+this.form.get('ville').value)
       .subscribe(res => {
           this.labo = res;
           console.log(this.labo);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  public allCountry(){
+    this.resourceService.getResources("/client/country/all")
+      .subscribe(res => {
+          this.country = res;
+          console.log(this.country);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  public allCitiesByCountry(){
+    this.resourceService.getResources("/client/country/"+this.form.get("pays").value+"/city")
+      .subscribe(res => {
+          this.cities = res;
+          console.log(this.cities);
         },
         error => {
           console.log(error);

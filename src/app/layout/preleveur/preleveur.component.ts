@@ -40,7 +40,7 @@ export class PreleveurComponent implements OnInit {
       sexe: ['', Validators.required],
       password: ['', Validators.required],
       username: ['', Validators.required],
-      typeControleur: ['', Validators.required],
+      laboratoire: ['', Validators.required],
     });
   }
 
@@ -59,13 +59,19 @@ export class PreleveurComponent implements OnInit {
       sexe: this.form.get("sexe").value,
       password: this.form.get("password").value,
       username: this.form.get("username").value,
+      ville: "",
+      laboratoire:{
+        id:this.form.get("laboratoire").value
+      },
       role: "PRELEVEUR",
     };
+
     console.log("nombre de caractère de l'image "+imageId.length);
     this.resourceService.resourceForLogin("/client/auth/register", preleveur)
       .subscribe(res => {
           this.spinner.hide();
           this.form.reset();
+          this.urlFile = null;
           this.toastr.success("Votre compte a été enregistré avec succès.");
         },
         error => {
@@ -103,6 +109,10 @@ export class PreleveurComponent implements OnInit {
     reader.onload = (_event) => {
       this.urlFile = reader.result;
     }
+  }
+
+  public resetForm(){
+    this.form.reset();
   }
 
 }

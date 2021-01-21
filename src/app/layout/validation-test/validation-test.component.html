@@ -46,21 +46,22 @@
           <h4 class="card-title">Informations sur l’anonymat du patient</h4>
           <div class="form">
             <div class="form-group row">
-              <div class="col-md-12">
-                <input type="text" class="form-control rounded"  placeholder="N° anonymat" (blur)="searchPatient()" [(ngModel)]="search">
+              <label class="col-md-3 col-form-label">N° anonymat</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control rounded" value="{{patient.identifiant}}" readonly>
               </div>
             </div>
             <div class="text-left">
               <div class="col-md-10">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="checkbox" class="rounded" value="true" [(ngModel)]="soins"> Soins fait
+                    <input type="checkbox" name="checkbox" class="rounded" value="true" [(ngModel)]="soins"> Prélèvement effectué
                   </label>
                 </div>
               </div>
             </div>
             <div class="text-right">
-              <button type="submit" class="btn btn-primary-one" (click)="saveVaccin()" [disabled]="((patient | json) == '{}') || soins == false">Envoyer</button>
+              <button type="submit" class="btn btn-primary-one" (click)="saveTest()" [disabled]="((patient | json) == '{}') || soins == false">Envoyer</button>
             </div>
           </div>
         </div>

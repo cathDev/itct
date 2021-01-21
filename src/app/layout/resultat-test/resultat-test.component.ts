@@ -50,9 +50,6 @@ export class ResultatTestComponent implements OnInit {
     /*this.allTest();*/
     this.allRDV();
     this.initForm();
-
-    console.log("voici le patient");
-    console.log(this.patient);
   }
 
   initForm() {
@@ -137,7 +134,6 @@ export class ResultatTestComponent implements OnInit {
     console.log(this.form.value);
     var test = {
       "commentaire": this.form.get("testCommentaire").value,
-      "done": this.appointment.done,
       "jour": this.appointment.jour,
       "laboratoire": {
         "id": this.appointment.laboratoire.id,
@@ -165,6 +161,7 @@ export class ResultatTestComponent implements OnInit {
         console.log("le test est bien enregistrer");
           this.spinner.hide();
           this.form.reset();
+          this.patient = {};
           this.toast.success("Opération effectuée avec succès.");
         },
         error => {

@@ -12,7 +12,7 @@
         <li>
           <a routerLink="/patients"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
         </li>-->
-        <li *ngIf="user.role == 'LABORANTIN'">
+        <li *ngIf="user.role == 'LABORANTIN'|| user.role == 'PRELEVEUR'">
           <a routerLink="/appointments"><i class="fa fa-calendar"></i> <span translate>Appointment</span></a>
         </li>
         <li *ngIf="user.role == 'PATIENT'">
@@ -21,7 +21,7 @@
         <li *ngIf="user.role == 'PATIENT'">
           <a routerLink="/mes-resultat"><i class="fa fa-calendar"></i> <span translate>My results</span></a>
         </li>
-        <li *ngIf="user.role == 'LABORANTIN'">
+        <!--<li *ngIf="user.role == 'LABORANTIN'">
           <a routerLink="/resultat-test"><i class="fa fa-calendar"></i> <span translate>Covid19 test result</span></a>
         </li>
         <li *ngIf="user.role == 'LABORANTIN'">
@@ -35,7 +35,7 @@
             <i class="fa fa-calendar"></i>
             <span translate>Covid19 Test Sample</span>
           </a>
-        </li>
+        </li>-->
         <li *ngIf="user.role == 'ADMIN'">
           <a routerLink="/preleveur">
             <i class="fa fa-calendar"></i>

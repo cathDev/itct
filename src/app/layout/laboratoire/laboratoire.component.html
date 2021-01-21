@@ -150,12 +150,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let labo of laboratoires">
+                  <tr *ngFor="let labo of laboratoires | paginate: { itemsPerPage: items, currentPage: p}; let i=index">
                     <td>{{labo.name}}</td>
-                    <td>{{labo.ville}}</td>
+                    <td>{{labo.city.label}}</td>
                   </tr>
                 </tbody>
               </table>
+              <ul class="pagination" style="margin-top: 20px;">
+                <pagination-controls (pageChange)="p = $event"
+                                     responsive="true"
+                                     previousLabel="Précédent"
+                                     nextLabel="Suivant"
+                >
+
+                </pagination-controls>
+              </ul>
             </div>
           </div>
         </div>

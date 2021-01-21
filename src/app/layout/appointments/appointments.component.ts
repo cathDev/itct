@@ -23,6 +23,9 @@ export class AppointmentsComponent implements OnInit {
   user : any;
   userRole : any;
 
+  p: number = 1;
+  items: number = 8;
+
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private router : Router,
@@ -45,7 +48,7 @@ export class AppointmentsComponent implements OnInit {
       .subscribe(res => {
           result = res;
           result.forEach(appointment => {
-            if(appointment.objetAppointment.label.toLowerCase() == "test covid" && appointment.done == false){
+            if(appointment.objetAppointment.label.toLowerCase() == "test covid" && appointment.retrieved == false){
               testNonPreleve.push(appointment);
             }
             else {
@@ -90,7 +93,7 @@ export class AppointmentsComponent implements OnInit {
     this.utilsService.setAppointment(obj);
     /*this.router.navigateByUrl("/resultat-test");*/
     if((motif.label).toLowerCase() == "test covid"){
-      if(obj.done == false){
+      if(obj.retrieved == false){
         this.router.navigateByUrl("/valider-test");
       }
       else{
@@ -108,6 +111,9 @@ export class AppointmentsComponent implements OnInit {
   }
 
   public searchAppointment(){
+    if(this.appointments.length == 0){
+      this.appointments = this.appointmentsAll;
+    }
     console.log("Hello");
     console.log(this.search);
     var filterTabs = [];
@@ -117,6 +123,8 @@ export class AppointmentsComponent implements OnInit {
       }
     });
     this.appointments = filterTabs;
+
+    console.log(this.appointments);
   }
 
   public dateToInt(date){
