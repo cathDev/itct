@@ -46,6 +46,7 @@ export class PreleveurComponent implements OnInit {
 
   save(){
     this.spinner.hide();
+    var result;
     console.log(this.form.value);
     var imageId = new String("");
     if(this.urlFile != null) imageId = this.urlFile.split(",")[1];
@@ -69,10 +70,16 @@ export class PreleveurComponent implements OnInit {
     console.log("nombre de caractère de l'image "+imageId.length);
     this.resourceService.resourceForLogin("/client/auth/register", preleveur)
       .subscribe(res => {
+          result =res;
           this.spinner.hide();
-          this.form.reset();
-          this.urlFile = null;
-          this.toastr.success("Votre compte a été enregistré avec succès.");
+          if(result.error_message == "Username Already Used"){
+            this.toastr.warning(result.error_message+".");
+          }
+          else {
+            this.toastr.success(result.message+".");
+            this.form.reset();
+            this.urlFile = null;
+          }
         },
         error => {
           this.spinner.hide();

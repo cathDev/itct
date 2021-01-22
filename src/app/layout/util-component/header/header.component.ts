@@ -12,6 +12,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class HeaderComponent implements OnInit {
   userConnected: any = {};
   username = "";
+  imagePath : any = null;
 
   constructor(
     private authenticationService : AuthenticationService,
@@ -26,20 +27,19 @@ export class HeaderComponent implements OnInit {
     console.log(this.userConnected);
 
     if(this.userConnected.role== "LABORANTIN"){
-      this.username = this.userConnected.laboratoire.username;
+      this.username = this.userConnected.user.username;
     }
     else{
       this.username = this.userConnected.username;
     }
 
-    /*
-    var image
-         image = 'data:image/png;base64,'+this.userConnected.imageSelfie;
-         this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
-         imagePassport = 'data:image/png;base64,'+this.patient.imagePassport;
-         this.imagePassport = this.sanitizer.bypassSecurityTrustResourceUrl(imagePassport);
-         console.log(this.patient);*/
-
+    var user = this.userConnected.user;
+    if(user.hasOwnProperty("imageSelfie")){
+      console.log("je possède la propriété : imageSelfie");
+      var image;
+      image = 'data:image/png;base64,'+this.userConnected.user.imageSelfie;
+      this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
+    }
   }
 
   logout(event){

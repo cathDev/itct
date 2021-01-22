@@ -45,6 +45,7 @@ export class RegisterComponent implements OnInit {
   step2 : number = 0;
   step3 : number = 0;
 
+
   constructor(
     private authenticationService : AuthenticationService,
     private router : Router,

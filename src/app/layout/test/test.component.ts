@@ -40,13 +40,14 @@ export class TestComponent implements OnInit {
   ngOnInit() {
     tools();
     this.userConnected = this.authenticationService.getUserInLocalStorage();
-    this.patient = this.userConnected.patient;
-
-    this.allAppointment();
+    this.patient = this.userConnected.user;
+    console.log(this.patient);
     /*this.allLabo();*/
     this.allCountry();
     this.objectAppointment();
     this.initForm();
+
+    this.allAppointment();
   }
 
   initForm() {
@@ -68,7 +69,8 @@ export class TestComponent implements OnInit {
   }
 
   public allAppointment(){
-    this.resourceService.getResources(this.url+"/all")
+    console.log(this.patient.id);
+    this.resourceService.getResources(this.url+"/patient/"+this.patient.id)
       .subscribe(res => {
           this.appointments = res;
           console.log(this.appointments);

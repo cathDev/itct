@@ -22,6 +22,7 @@ export class AppointmentsComponent implements OnInit {
   image : any;
   user : any;
   userRole : any;
+  idLabo: number;
 
   p: number = 1;
   items: number = 8;
@@ -37,6 +38,19 @@ export class AppointmentsComponent implements OnInit {
   ngOnInit() {
     this.user = this.authenticationService.getUserInLocalStorage();
     this.userRole = this.user.role;
+    console.log(this.userRole);
+    if(this.userRole == "LABORANTIN"){
+      this.idLabo = this.user.user.id;
+      console.log(this.userRole);
+      console.log("je suis connecté en tant que labo");
+    }
+    else if(this.userRole == "PRELEVEUR"){
+      this.idLabo = this.user.user.laboratoire.id;
+      console.log(this.userRole);
+      console.log("je suis connecté en tant que preleveur");
+    }
+
+
     this.allAppointments();
   }
 
@@ -44,7 +58,7 @@ export class AppointmentsComponent implements OnInit {
     var result;
     var testPreleve = [];
     var testNonPreleve = [];
-    this.resourceService.getResources(this.url+"/all")
+    this.resourceService.getResources(this.url+"/labo/"+this.idLabo)
       .subscribe(res => {
           result = res;
           result.forEach(appointment => {

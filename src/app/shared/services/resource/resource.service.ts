@@ -4,6 +4,7 @@ import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,6 @@ export class ResourceService {
     private router: Router,
     private toastr: ToastrService,
   ) {
-    /*this.getTimes();
-    this.invalidToken();*/
 
   }
 
@@ -86,7 +85,7 @@ export class ResourceService {
   }
 
   public invalidToken(){
-    console.log("voici le temps d'expiration");
+    /*console.log("voici le temps d'expiration");
     console.log(Number(localStorage.getItem('expireAt')));
     var actualTime = new Date();
     console.log("voici le temps de la requete");
@@ -99,18 +98,25 @@ export class ResourceService {
     console.log(timeDif);
 
     if(timeDif >= Number(localStorage.getItem('expireAt'))){
-    /*if(timeDif >= 120000){*/
+    /!*if(timeDif >= 120000){*!/
       console.log("session expirée");
       localStorage.clear();
       this.sessionExpire = true;
-      /*this.toastr.error("votre session a expiré");*/
+      /!*this.toastr.error("votre session a expiré");*!/
+      this.router.navigate(['/login']);
+      return;
+    }*/
+
+    let token = localStorage.getItem('token');
+    let helper = new JwtHelperService();
+    let isExpired = helper.isTokenExpired(token);
+    console.log("le token est expiré ? " +isExpired);
+
+    if(isExpired == true){
+      this.toastr.error("Votre session a expiré.");
       this.router.navigate(['/login']);
       return;
     }
-  }
 
-  public getSession(){
-    return this.sessionExpire;
   }
-
 }

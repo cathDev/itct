@@ -95,7 +95,8 @@
     <li class="nav-item dropdown has-arrow">
       <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
         <span class="user-img">
-          <img class="rounded-circle" src="assets/img/user.jpg" width="24" alt="Admin">
+          <img class="rounded-circle" src="assets/img/user.jpg" width="24" height="24" *ngIf="this.userConnected.user.imageSelfie == null">
+          <img class="rounded-circle" [src]="imagePath" width="24" height="24" *ngIf="this.userConnected.user.imageSelfie != null">
           <span class="status online"></span>
         </span>
         &nbsp;<span>{{username}}</span>

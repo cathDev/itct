@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
       }]
     });
 
-    chart.render();
+    /*chart.render();*/
   }
 
   getAllLabo(){
