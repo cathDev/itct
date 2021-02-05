@@ -14,7 +14,6 @@ export class ResourceService {
   public host = environment.baseUrl;
   public message = "";
   public user = JSON.parse(localStorage.getItem('userConnect'));
-  private sessionExpire : boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -75,37 +74,7 @@ export class ResourceService {
     return this.http.put(this.host+url, data);
   }
 
-  public getTimes(){
-    var heure;
-    var heureInSecond;
-    heure = new Date().toString().split(' ')[4];
-    heure = heure.split(':');
-    heureInSecond = ((Number(heure[0]) * 3600) + (Number(heure[1]) * 60) + Number(heure[2]));
-    return heureInSecond;
-  }
-
   public invalidToken(){
-    /*console.log("voici le temps d'expiration");
-    console.log(Number(localStorage.getItem('expireAt')));
-    var actualTime = new Date();
-    console.log("voici le temps de la requete");
-    console.log(actualTime.getTime());
-    var connexionDate = new Date(localStorage.getItem('conected_hour'));
-    console.log("voici le temps de la connexion");
-    console.log(connexionDate.getTime());
-    var timeDif = (actualTime.getTime() - connexionDate.getTime());
-    console.log("voici la difference de temps");
-    console.log(timeDif);
-
-    if(timeDif >= Number(localStorage.getItem('expireAt'))){
-    /!*if(timeDif >= 120000){*!/
-      console.log("session expirée");
-      localStorage.clear();
-      this.sessionExpire = true;
-      /!*this.toastr.error("votre session a expiré");*!/
-      this.router.navigate(['/login']);
-      return;
-    }*/
 
     let token = localStorage.getItem('token');
     let helper = new JwtHelperService();
@@ -113,10 +82,16 @@ export class ResourceService {
     console.log("le token est expiré ? " +isExpired);
 
     if(isExpired == true){
+      localStorage.removeItem('userConnect');
+      localStorage.removeItem('conected');
+      localStorage.removeItem('token');
+      localStorage.removeItem('expireAt');
       this.toastr.error("Votre session a expiré.");
+
       this.router.navigate(['/login']);
       return;
     }
 
   }
+
 }

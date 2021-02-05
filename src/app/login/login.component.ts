@@ -5,6 +5,7 @@ import {AuthenticationService} from '../shared/services/authentication/authentic
 import {ResourceService} from '../shared/services/resource/resource.service';
 import {NgxSpinnerService} from 'ngx-spinner';
 import {ToastrService} from 'ngx-toastr';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 /*declare function tools(): any;*/
 /*declare function loginEvent(): any;*/
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   messageSessionExpire: string = "";
   urlProfilImage:any;
   urlPassportImage:any;
+  private timer;
 
   passportType = [
     {
@@ -54,18 +56,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
    /* loginEvent();*/
-    this.initForm();
-    this.initRegisterForm();
 
     if(this.authenticationService.isAuthenticate()){
       this.router.navigateByUrl("/dashboard");
     }
 
-    /*this.messageSessionExpire = this.resourceService.getSession();*/
-    /*if(this.resourceService.getSession() == true){
-      console.log(this.resourceService.getSession());
-      this.toastr.error("Votre session a expiré.");
-    }*/
+
+    this.initForm();
+    this.initRegisterForm();
 
   }
 
@@ -113,16 +111,14 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.loginForm.value)
       .subscribe(res => {
         response = res;
-        var date;
         if(response.authenticationToken != null){
           localStorage.setItem('userConnect', JSON.stringify(response));
           localStorage.setItem('conected', 'true');
-          date = new Date();
-          localStorage.setItem('conected_hour', date);
           localStorage.setItem('token', response.authenticationToken);
           localStorage.setItem('expireAt', response.expiresAt);
           this.message = "";
           this.router.navigate(['/dashboard']);
+
         }
         else {
           this.router.navigate(['/login']);

@@ -41,7 +41,7 @@ export class ResultatTestComponent implements OnInit {
   ngOnInit() {
     tools();
     this.userConnected = this.authenticationService.getUserInLocalStorage();
-    this.labo = this.userConnected.laboratoire;
+    this.labo = this.userConnected.user;
 
     this.patient = this.utilsService.getPatient();
     this.appointment = this.utilsService.getAppointment();

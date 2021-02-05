@@ -4,6 +4,7 @@ import {RegisterComponent} from './register.component';
 import {RegisterRoutingModule} from './register-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -12,7 +13,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     RegisterRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ]
 })
 export class RegisterModule { }

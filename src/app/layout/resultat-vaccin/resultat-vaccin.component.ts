@@ -45,14 +45,11 @@ export class ResultatVaccinComponent implements OnInit {
     tools();
     var image;
     this.userConnected = this.authenticationService.getUserInLocalStorage();
-    this.labo = this.userConnected.laboratoire;
+    this.labo = this.userConnected.user;
 
     this.patient = this.utilsService.getPatient();
     this.appointment = this.utilsService.getAppointment();
-    /*this.birthday = this.millisToDate(this.patient.birthday);
-    image = 'data:image/png;base64,'+this.patient.imageSelfie;
-    this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(image);
-    console.log(this.patient);*/
+
 
     this.allPatient();
    /* this.allTest();*/
@@ -67,7 +64,7 @@ export class ResultatVaccinComponent implements OnInit {
     };
 
     this.allRDV();
-    this.allVaccin();
+    this.vaccins = this.labo.vaccins;
   }
 
   public searchPatient(){
@@ -121,17 +118,6 @@ export class ResultatVaccinComponent implements OnInit {
         });
   }
 
-  public allVaccin(){
-    this.resourceService.getResources("/vaccin/all")
-      .subscribe(res => {
-          this.vaccins = res;
-          console.log(this.vaccins);
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
   public millisToDate(millis){
     console.log(new Date(millis));
     const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
@@ -147,6 +133,7 @@ export class ResultatVaccinComponent implements OnInit {
 
   saveVaccin(){
     this.spinner.show();
+
     var test = {
       "commentaire": this.appointment.commentaire,
       "jour": this.appointment.jour,

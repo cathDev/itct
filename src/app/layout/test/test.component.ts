@@ -5,6 +5,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {ToastrService} from 'ngx-toastr';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';
 import * as CanvasJS from '../../../assets/js/canvasjs.min';
+import {ConfirmationDialogService} from '../../shared/services/confirmationDialog/confirmation-dialog.service';
 
 declare function tools(): any;
 
@@ -29,12 +30,18 @@ export class TestComponent implements OnInit {
   p: number = 1;
   items: number = 8;
 
+  //variable for translation
+  deleteTitle : string = "Cancel the appointment";
+  prevoius : string = "Previous";
+  next : string = "Next";
+
   constructor(
               private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private authenticationService: AuthenticationService,
               private spinner: NgxSpinnerService,
-              private toast: ToastrService,
+              private confirmationDialogService: ConfirmationDialogService,
+              private toast: ToastrService
               ) { }
 
   ngOnInit() {
@@ -168,8 +175,29 @@ export class TestComponent implements OnInit {
         });
   }
 
-  public cancelAppointment(event){
+  cancelAppointment(event, obj){
     event.preventDefault();
+    console.log(obj);
+    /*this.resourceService.saveResource('/laboratoire/delete/'+obj.id, null)
+      .subscribe(data => {
+        this.toast.success("Annulation réussie.");
+        this.allAppointment();
+      }, error => {
+
+      });*/
   }
+
+  public openConfirmationDialog(event: MouseEvent,obj) {
+    event.preventDefault();
+    this.confirmationDialogService.confirm('Confirmer l\'annulation du RDV', 'Voulez-vous annuler ce RDV ?', 'Oui', 'Non')
+      .then((confirmed) => {
+        if (confirmed) {
+          this.cancelAppointment(event,obj)
+        }
+
+      })
+      .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+  }
+
 
 }

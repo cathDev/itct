@@ -24,6 +24,9 @@ import { ValidationTestComponent } from './validation-test/validation-test.compo
 import { PreleveurComponent } from './preleveur/preleveur.component';
 import { ControleurComponent } from './controleur/controleur.component';
 import {FilterPipe} from '../shared/pipe/filter-pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogComponent } from './util-component/confirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogService} from '../shared/services/confirmationDialog/confirmation-dialog.service';
 
 
 @NgModule({
@@ -45,7 +48,8 @@ import {FilterPipe} from '../shared/pipe/filter-pipe';
     ValidationTestComponent,
     PreleveurComponent,
     ControleurComponent,
-    FilterPipe
+    FilterPipe,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,14 @@ import {FilterPipe} from '../shared/pipe/filter-pipe';
     NgxSpinnerModule,
     NgMultiSelectDropDownModule.forRoot(),
     NgxPaginationModule,
+    NgbModule,
     TranslateModule
-  ]
+  ],
+  providers: [
+    ConfirmationDialogService,
+  ],
+    entryComponents: [
+    ConfirmationDialogComponent
+  ],
 })
 export class LayoutModule { }

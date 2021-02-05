@@ -39,11 +39,16 @@ export class RegisterComponent implements OnInit {
   ];
 
   pays : any = [];
+  country : any = [];
+  cities : any = [];
   countryObject : any = {};
   dialCode: any;
   step1 : number = 1;
   step2 : number = 0;
   step3 : number = 0;
+
+
+  dropdownSettings = {};
 
 
   constructor(
@@ -59,7 +64,18 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     tools();
     this.initRegisterForm();
-    this.allCountry();
+    /*this.allCountry();*/
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'label',
+      selectAllText: 'Sélectionner tout',
+      unSelectAllText: 'Désélectionner tout',
+      itemsShowLimit: 8,
+      allowSearchFilter: true
+    };
+
+    this.allCountryOfBD();
   }
 
   enableStep1(){
@@ -86,16 +102,16 @@ export class RegisterComponent implements OnInit {
       dateExpiration: ['', Validators.required],
       email: ['', Validators.required],
       imageSelfie: ['', Validators.required],
-      imagePassport: ['', Validators.required],
+      imageId: ['', Validators.required],
       name: ['', Validators.required],
       numeroPassport: ['', Validators.required],
       phone: ['', Validators.required],
       sexe: ['', Validators.required],
       password: ['', Validators.required],
       username: ['', Validators.required],
-      ville: ['', Validators.required],
+      /*ville: ['', Validators.required],*/
       typePassport: ['', Validators.required],
-      pays: ['', Validators.required],
+      country: ['', Validators.required],
     });
   }
 
@@ -162,12 +178,14 @@ export class RegisterComponent implements OnInit {
 
     if(this.urlPassportImage != null) imagepassport = this.urlPassportImage.split(",")[1];
 
+    var pays = this.registerForm.get("country").value;
+
     var patient = {
       birthday: this.registerForm.get("birthday").value,
       dateExpiration: this.registerForm.get("dateExpiration").value,
       email: this.registerForm.get("email").value,
       imageSelfie: imageId,
-      imagePassport: imagepassport,
+      imageId: imagepassport,
       name: this.registerForm.get("name").value,
       numeroPassport: this.registerForm.get("numeroPassport").value,
       phone: this.registerForm.get("phone").value,
@@ -178,8 +196,8 @@ export class RegisterComponent implements OnInit {
         id: this.registerForm.get("typePassport").value,
         libelle: typePassport.label
       },
-      role: "PATIENT",
-      ville: this.registerForm.get("ville").value
+      country : pays[0].label,
+      role: "PATIENT"
     };
 
     console.log(this.registerForm.value);
@@ -234,6 +252,32 @@ export class RegisterComponent implements OnInit {
           console.log(error);
         });
  }
+
+
+  public allCountryOfBD(){
+    this.resourceService.getResourcesWithoutSecurity("/client/country/all")
+      .subscribe(res => {
+          this.country = res;
+          console.log(this.country);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  public allCitiesByCountry(event){
+
+    console.log(event);
+    var country = event;
+    this.resourceService.getResources("/client/country/"+country.id+"/city")
+      .subscribe(res => {
+          this.cities = res;
+          console.log(this.cities);
+        },
+        error => {
+          console.log(error);
+        });
+  }
 
 
 }

@@ -2,7 +2,7 @@
   <div class="content">
     <div class="row">
       <div class="col-sm-4 col-3">
-        <h4 class="page-title">Laboratoires</h4>
+        <h4 class="page-title" translate>Laboratories</h4>
         <!--<ul class="breadcrumb">
           <li><a routerLink="/dashboard">Tableau de bord</a></li>
           <li>Laboratoire</li>
@@ -16,7 +16,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card-box">
-          <h4 class="card-title" style="margin-left:25%;margin-right: 25%;">Enregistrer un Laboratoire</h4><br>
+          <h4 class="card-title" style="margin-left:25%;margin-right: 25%;" translate>Register a Laboratory</h4><br>
           <div class="form">
             <div>
               <div class="row">
@@ -25,111 +25,234 @@
                     <img class="inline-block" src="assets/img/user.jpg" alt="logo laboratoire" *ngIf="urlFile == null">
                     <img class="inline-block" src={{urlFile}} alt="logo laboratoire" *ngIf="urlFile != null">
                     <div class="fileupload btn">
-                      <span class="btn-text" *ngIf="urlFile == null">logo</span>
+                      <span class="btn-text" *ngIf="urlFile == null" translate>logo</span>
                       <input class="upload inline-block" type="file" (change)="onFileChanged($event)">
                     </div>
                   </div>
                   <div class="profile-basic">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group form-focus">
-                          <label class="focus-label">Nom Laboratoire</label>
-                          <input type="text" class="form-control floating" value="">
+                    <form [formGroup]="form" (ngSubmit)="saveLabo()">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group form-focus">
+                            <label class="focus-label" translate>Laboratory name</label>
+                            <input type="text" class="form-control floating" formControlName="name">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group form-focus select-focus">
-                          <label class="focus-label">Pays</label>
-                          <select class="form-control floating">
-                            <option value="male selected">Male</option>
-                            <option value="female">Female</option>
-                          </select>
+                      <div class="row">
+
+                        <div class="col-md-6" style="margin-top: 15px;">
+                          <ng-multiselect-dropdown
+                            [placeholder]="'Select country' | translate"
+                            [data]="country"
+                            [(ngModel)]="paysSelectionner"
+                            [settings]="dropdownSettings1"
+                            (onSelect)="allCitiesByCountry($event)"
+                            formControlName="country"
+                          >
+                          </ng-multiselect-dropdown>
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group form-focus select-focus">
+                            <label class="focus-label" translate>City</label>
+                            <select class="form-control floating" formControlName="city">
+                              <option [ngValue]="city.id" *ngFor="let city of cities">{{city.label}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <!--<div class="col-md-6">
+                          <div class="form-group form-focus">
+                            <label class="focus-label">Longitude</label>
+                            <input class="form-control floating" type="text" value="">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group form-focus select-focus">
+                            <label class="focus-label">Latitude</label>
+                            <input type="text" class="form-control floating" value="">
+                          </div>
+                        </div>-->
+                      </div>
+                      <br/><h5 style="color: grey; margin-left: 250px;margin-right: 250px;" translate>Services</h5><hr/>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="checkbox">
+                            <label translate>
+                              <input type="checkbox" value="test" name="test" class="rounded" style="width: 15px;height: 15px;margin-top: 10px;" formControlName="test">
+                              Covid19 test
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="checkbox">
+                            <label translate>
+                              <input type="checkbox" value="vaccin" name="vaccin" class="rounded" [(ngModel)]="vaccinChecked" style="width: 15px;height: 15px;margin-top: 10px;" formControlName="vaccin">
+                              Vaccines
+                            </label>
+                          </div>
+                        </div>
+                        <!--<div class="col-md-4">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" value="autre" name="autre" class="rounded" style="width: 15px;height: 15px;margin-top: 10px;" formControlName="service">
+                              Autres
+                            </label>
+                          </div>
+                        </div>-->
+                      </div>
+                      <div class="row" *ngIf="vaccinChecked">
+                        <div class="col-md-10" style="margin-top: 15px;">
+                          <ng-multiselect-dropdown
+                            [placeholder]="'Select the vaccines performed' | translate"
+                            [data]="vaccins"
+                            [(ngModel)]="vaccinEffectuer"
+                            [settings]="dropdownSettings"
+                            formControlName="vaccins"
+                          >
+                          </ng-multiselect-dropdown>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group form-focus select-focus">
-                          <label class="focus-label">Ville</label>
-                          <select class="form-control floating">
-                            <option value="male selected">Male</option>
-                            <option value="female1">Female</option>
-                          </select>
+                      <br/><h5 style="color: grey; margin-left: 250px;margin-right: 250px;" translate>Account administrator</h5><hr/>
+                      <div class="row" >
+                        <div class="col-md-6">
+                          <div class="form-group form-focus">
+                            <label class="focus-label" translate>Username</label>
+                            <input type="text" class="form-control floating" style="margin-top: 10px;" formControlName="username">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group form-focus">
+                            <label class="focus-label" translate>Password</label>
+                            <input type="password" class="form-control floating" style="margin-top: 10px;" formControlName="password">
+                          </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group form-focus">
-                          <label class="focus-label">Longitude</label>
-                          <input class="form-control floating" type="text" value="">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group form-focus select-focus">
-                          <label class="focus-label">Latitude</label>
-                          <input type="text" class="form-control floating" value="">
-                        </div>
-                      </div>
-                    </div>
-                    <br/><h5 style="color: grey; margin-left: 250px;margin-right: 250px;">Services</h5><hr/>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="test" name="test" class="rounded" style="width: 15px;height: 15px;margin-top: 10px;">
-                            Test covid19
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="vaccin" name="vaccin" class="rounded" [(ngModel)]="vaccinChecked" style="width: 15px;height: 15px;margin-top: 10px;">
-                            Vaccins
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" value="autre" name="autre" class="rounded" style="width: 15px;height: 15px;margin-top: 10px;">
-                            Autres
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row" *ngIf="vaccinChecked">
-                      <div class="col-md-10" style="margin-top: 15px;">
-                        <ng-multiselect-dropdown
-                          [placeholder]="'selectionner les vaccins effectués'"
-                          [data]="vaccins"
-                          [(ngModel)]="vaccinEffectuer"
-                          [settings]="dropdownSettings"
-                        >
-                        </ng-multiselect-dropdown>
-                      </div>
-                    </div>
-                    <br/><h5 style="color: grey; margin-left: 250px;margin-right: 250px;">Administrateur du compte</h5><hr/>
-                    <div class="row" >
-                      <div class="col-md-6">
-                        <div class="form-group form-focus">
-                          <label class="focus-label">Nom d'utilisateur</label>
-                          <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group form-focus">
-                          <label class="focus-label">Mot de passe</label>
-                          <input type="text" class="form-control floating" value="" style="margin-top: 10px;">
-                        </div>
-                      </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
             <div class="text-right" style="margin-top: 25px;">
-              <button type="submit" class="btn btn-secondary-one" (click)="resetForm()">Annuler</button>&nbsp;&nbsp;
-              <button type="submit" class="btn btn-primary-one" (click)="saveLabo()">Enregistrer</button>
+              <button type="submit" class="btn btn-secondary-one" (click)="resetForm()" translate>Cancel</button>&nbsp;&nbsp;
+              <button type="submit" class="btn btn-primary-one" (click)="saveLabo()" translate>Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="myModal" class="modal fade " role="dialog">
+      <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="height:auto;">
+          <div class="card">
+            <div class="card-header">
+              <button type="button" class="close" data-dismiss="modal" (click)="resetForm()">&times;</button>
+              <h4 class="card-title" translate>Modify laboratory</h4>
+            </div>
+            <div class="card-body">
+              <div class="form">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="profile-img-wrap">
+                      <img class="inline-block" src="assets/img/user.jpg" alt="logo laboratoire" *ngIf="(((urlFile == null) && (objUpdateImage == null)) || ((urlFile == null) && (objUpdateImage == '')))">
+                      <img class="inline-block" src={{urlFile}} alt="logo laboratoire" *ngIf="urlFile != null">
+                      <img class="inline-block" [src]="imagePath" alt="logo laboratoire" *ngIf="imagePath != null">
+                      <div class="fileupload btn">
+                        <span class="btn-text" *ngIf="urlFile == null" translate>Profile picture</span>
+                        <input class="upload inline-block" type="file" (change)="onFileChanged($event)">
+                      </div>
+                    </div>
+                    <div class="profile-basic">
+                      <form [formGroup]="form">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group form-focus">
+                              <label class="focus-label" translate>Laboratory name</label>
+                              <input type="text" class="form-control floating" formControlName="name">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+
+                          <div class="col-md-6" style="margin-top: 15px;">
+                            <ng-multiselect-dropdown
+                              [placeholder]="'Select country' | translate"
+                              [data]="country"
+                              [(ngModel)]="paysSelectionner"
+                              [settings]="dropdownSettings1"
+                              (onSelect)="allCitiesByCountry($event)"
+                              formControlName="country"
+                            >
+                            </ng-multiselect-dropdown>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="form-group form-focus select-focus">
+                              <label class="focus-label" translate>City</label>
+                              <select class="form-control floating" formControlName="city">
+                                <option [ngValue]="city.id" *ngFor="let city of cities">{{city.label}}</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <br/><h5 style="color: grey; margin-left: 250px;margin-right: 250px;" translate>Services</h5><hr/>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="checkbox">
+                              <label translate>
+                                <input type="checkbox" value="test" name="test" class="rounded" style="width: 15px;height: 15px;margin-top: 10px;" formControlName="test">
+                                Covid19 test
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="checkbox">
+                              <label translate>
+                                <input type="checkbox" value="vaccin" name="vaccin" class="rounded" [(ngModel)]="vaccinChecked" style="width: 15px;height: 15px;margin-top: 10px;" formControlName="vaccin">
+                                Vaccines
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="vaccinChecked">
+                          <div class="col-md-10" style="margin-top: 15px;">
+                            <ng-multiselect-dropdown
+                              [placeholder]="'Select the vaccines performed' | translate"
+                              [data]="vaccins"
+                              [(ngModel)]="vaccinEffectuer"
+                              [settings]="dropdownSettings"
+                              formControlName="vaccins"
+                            >
+                            </ng-multiselect-dropdown>
+                          </div>
+                        </div>
+                        <br/><h5 style="color: grey; margin-left: 250px;margin-right: 250px;" translate>Account administrator</h5><hr/>
+                        <div class="row" >
+                          <div class="col-md-6">
+                            <div class="form-group form-focus">
+                              <label class="focus-label" translate>Username</label>
+                              <input type="text" class="form-control floating" style="margin-top: 10px;" formControlName="username">
+                            </div>
+                          </div>
+                          <!--<div class="col-md-6">
+                            <div class="form-group form-focus">
+                              <label class="focus-label" translate>Password</label>
+                              <input type="password" class="form-control floating" style="margin-top: 10px;" formControlName="password">
+                            </div>
+                          </div>-->
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right" style="margin-top: 25px;">
+                  <button type="submit" class="btn btn-secondary-one" (click)="resetForm()" translate>Cancel</button>&nbsp;&nbsp;
+                  <button type="submit" class="btn btn-primary-one" (click)="update()" translate>Save</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -140,19 +263,24 @@
       <div class="col-lg-12">
         <div class="card-box">
           <div class="card-block">
-            <h4 class="card-title">Liste des laboratoires</h4>
+            <h4 class="card-title" translate>List of laboratories</h4>
             <div class="table-responsive">
               <table class="table table-hover mb-0">
                 <thead class="bg-thead">
                   <tr>
-                    <th>Nom</th>
-                    <th>Ville</th>
+                    <th translate>Name</th>
+                    <th translate>City</th>
+                    <th translate>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let labo of laboratoires | paginate: { itemsPerPage: items, currentPage: p}; let i=index">
                     <td>{{labo.name}}</td>
                     <td>{{labo.city.label}}</td>
+                    <td>
+                      <a href="#" title="{{deleteTitle | translate}}" style="margin-right: 20px;" (click)="openConfirmationDialog($event, labo)"><i class="fa fa-remove"></i></a>
+                      <a href="#" title="{{updateTitle | translate}}" (click)="edit($event, labo)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
+                    </td>
                   </tr>
                 </tbody>
               </table>

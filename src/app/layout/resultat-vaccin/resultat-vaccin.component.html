@@ -55,7 +55,7 @@
               <label class="col-md-3 col-form-label">Sélectionner les vaccins</label>
               <div class="col-md-9" style="margin-top: 15px;">
                 <ng-multiselect-dropdown
-                  [placeholder]="'selectionner les vaccins effectués'"
+                  [placeholder]="'Sélectionner les vaccins effectués'"
                   [data]="vaccins"
                   [(ngModel)]="vaccinEffectuer"
                   [settings]="dropdownSettings"
@@ -66,7 +66,7 @@
             <h5 style="margin-bottom: 15px; margin-right: 10px;margin-left: 20px;" *ngIf="vaccinEffectuer.length > 0">Vaccins effectués sur le patient</h5>
             <div class="row" *ngIf="vaccinEffectuer.length > 0">
               <div class="col-md-3" *ngFor="let obj of vaccinEffectuer">
-                <input type="text" class="form-control rounded" value="{{obj.nomVaccin}}" readonly/>
+                <input type="text" class="form-control rounded" value="{{obj}}" readonly/>
               </div>
             </div><br *ngIf="vaccinEffectuer.length > 0"/>
             <!--<div class="form-group row">

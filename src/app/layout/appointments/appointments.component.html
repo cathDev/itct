@@ -2,13 +2,13 @@
   <div class="content">
     <div class="row">
       <div class="col-sm-4 col-4">
-        <h4 class="page-title">Rendez Vous</h4>
+        <h4 class="page-title" translate>Appointment</h4>
       </div>
       <div class="col-sm-6 col-6 text-right m-b-20">
         <!--<a href="add-doctor.html" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Ajouter un rendez vous</a>-->
         <div class="search-box float-right">
           <div class="input-group input-group-md" style="background-color: #fafafa;">
-            <input type="text" class="form-control" placeholder="Rechercher par date" onfocus="(this.type='date')" name="search" [(ngModel)]="search" (change)="searchAppointment()">
+            <input type="text" class="form-control" placeholder="{{searchPlaceholder | translate}}" onfocus="(this.type='date')" name="search" [(ngModel)]="search" (change)="searchAppointment()">
             <!--<span class="input-group-append">
               <button class="btn" type="button" (click)="searchAppointment()"><i class="fa fa-search"></i></button>
             </span>-->
@@ -16,12 +16,12 @@
         </div>
       </div>
       <div class="col-sm-2 col-2 float-right">
-        <button type="submit" class="btn btn-primary-one" (click)="refreshPage()"  style="margin-left: 35px; background-color: transparent; color: #96ab5c" [hidden]="search =='' ? true:false">Actualiser</button>
+        <button type="submit" class="btn btn-primary-one" (click)="refreshPage()"  style="margin-left: 35px; background-color: transparent; color: #96ab5c" [hidden]="search =='' ? true:false" translate>Refresh</button>
       </div>
     </div><br/>
     <div class="row doctor-grid">
       <div class="col-md-4 col-sm-4  col-lg-3" *ngFor="let appointment of appointments | paginate: { itemsPerPage: items, currentPage: p}; let i=index">
-        <div class="profile-widget activeAppointment" (click)="validateTestOrVaccin(appointment, $event)" title="Cliquez pour renseigner les résultats">
+        <div class="profile-widget activeAppointment" (click)="validateTestOrVaccin(appointment, $event)" title="{{appointmentTitle | translate}}">
           <div class="doctor-img">
             <a class="avatar" href="#" *ngIf="image == null"><img alt="" src="assets/img/user.jpg"></a>
             <a class="avatar" href="#" *ngIf="image != null"><img alt="" [src]="patientImage(appointment.patient.imageId)"></a>
@@ -54,8 +54,8 @@
           <ul class="pagination see-all-btn">
             <pagination-controls (pageChange)="p = $event"
                                  responsive="true"
-                                 previousLabel="Précédent"
-                                 nextLabel="Suivant"
+                                 previousLabel="{{paginationPrevious | translate}}"
+                                 nextLabel="{{paginationNext | translate}}"
             >
 
             </pagination-controls>

@@ -22,6 +22,10 @@ export class MesResultatsComponent implements OnInit {
   pV: number = 1;
   items: number = 8;
 
+  //variable for translation
+  prevoius : string = "Previous";
+  next : string = "Next";
+
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private authenticationService: AuthenticationService,

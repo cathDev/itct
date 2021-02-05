@@ -23,6 +23,10 @@ export class AppointmentsComponent implements OnInit {
   user : any;
   userRole : any;
   idLabo: number;
+  searchPlaceholder : string = "Search by date";
+  paginationPrevious : string = "Previous";
+  paginationNext : string = "Next";
+  appointmentTitle : string = "Click to fill in the results";
 
   p: number = 1;
   items: number = 8;
@@ -62,7 +66,8 @@ export class AppointmentsComponent implements OnInit {
       .subscribe(res => {
           result = res;
           result.forEach(appointment => {
-            if(appointment.objetAppointment.label.toLowerCase() == "test covid" && appointment.retrieved == false){
+            var objAppoint = appointment.objetAppointment;
+            if((objAppoint.label.toLowerCase() == "test covid") && (appointment.retrieved == false)){
               testNonPreleve.push(appointment);
             }
             else {
