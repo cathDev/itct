@@ -29,6 +29,15 @@ export class ValidationTestComponent implements OnInit {
   userConnected : any = {};
   labo : any = {};
 
+  // variable for translation
+
+  fullName = "Full Name";
+  sexe = "Sex";
+  birth = "Date of Birth";
+  tel = "Phone";
+  mail = "E-mail adress";
+  passNum = "Passport number";
+
   constructor(private formBuilder : FormBuilder,
               private resourceService : ResourceService,
               private authenticationService: AuthenticationService,

@@ -87,9 +87,9 @@
         <i class="fa fa-globe" style="font-size: 20px;"></i>
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#" (click)="switchLang('en', $event)" translate><i class="flag-icon flag-icon-us"></i> English</a>
-        <a class="dropdown-item" href="#" (click)="switchLang('fr', $event)" translate><i class="flag-icon flag-icon-fr"></i> French</a>
-        <a class="dropdown-item" href="#" (click)="switchLang('es', $event)" translate><i class="flag-icon flag-icon-es"></i> Spanish</a>
+        <a class="dropdown-item" href="#" [ngClass]="{'is-active': activeLang == 1}" (click)="switchLang('en', 1, $event)" translate><i class="flag-icon flag-icon-us"></i> English</a>
+        <a class="dropdown-item" href="#" [ngClass]="{'is-active': activeLang == 2}" (click)="switchLang('fr', 2, $event)" translate><i class="flag-icon flag-icon-fr"></i> French</a>
+        <a class="dropdown-item" href="#" [ngClass]="{'is-active': activeLang == 3}" (click)="switchLang('es', 3, $event)" translate><i class="flag-icon flag-icon-es"></i> Spanish</a>
       </div>
     </li>
     <li class="nav-item dropdown has-arrow">

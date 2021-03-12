@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   userConnected: any = {};
   username = "";
   imagePath : any = null;
+  activeLang : number = 1;
 
   constructor(
     private authenticationService : AuthenticationService,
@@ -47,9 +48,10 @@ export class HeaderComponent implements OnInit {
     this.authenticationService.logout();
   }
 
-  switchLang(language : string, event){
+  switchLang(language : string, langNum, event){
     event.preventDefault();
     this.translate.use(language);
+    this.activeLang = langNum;
   }
 
 }

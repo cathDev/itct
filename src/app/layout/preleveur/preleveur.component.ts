@@ -42,7 +42,7 @@ export class PreleveurComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: '',
       birthday: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+[a-zA-Z0-9._-]*[^\.]@{1}[a-z]{2,}\.{1}[a-z]{2,4}$/)]],
       imageSelfie: ['', Validators.required],
       name: ['', Validators.required],
       phone: ['', Validators.required],
@@ -51,6 +51,10 @@ export class PreleveurComponent implements OnInit {
       username: ['', Validators.required],
       laboratoire: ['', Validators.required],
     });
+  }
+
+  public get f() {
+    return this.form.controls;
   }
 
   save(){
@@ -210,7 +214,7 @@ export class PreleveurComponent implements OnInit {
           name: obj.name,
           phone: obj.phone,
           sexe: obj.sexe,
-          password: "",
+          password: "123",
           username: obj.user.username,
           laboratoire: obj.laboratoire.id,
         }
@@ -255,7 +259,6 @@ export class PreleveurComponent implements OnInit {
       name: this.form.get("name").value,
       phone: this.form.get("phone").value,
       sexe: this.form.get("sexe").value,
-      password: this.form.get("password").value,
       username: this.form.get("username").value,
       ville: "",
       laboratoire:{

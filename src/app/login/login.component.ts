@@ -24,6 +24,10 @@ export class LoginComponent implements OnInit {
   urlProfilImage:any;
   urlPassportImage:any;
   private timer;
+  private linkPreleveur = ["appointments","valider-test"];
+  private linkLaboratoire = ["appointments","resultat-test","resultat-vaccin"];
+  private linkAdmin = ["preleveur","controleur","laboratoires"];
+  private linkPatient = ["mes-resultat", "prendre-rendez-vous"];
 
   passportType = [
     {
@@ -107,17 +111,37 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
 
     var response ;
+    var link = [];
 
     this.authenticationService.login(this.loginForm.value)
       .subscribe(res => {
         response = res;
         if(response.authenticationToken != null){
+          this.message = "";
+          this.router.navigate(['/dashboard']);
+
+          if(res.role == "PRELEVEUR"){
+            link = this.linkPreleveur;
+            console.log("PRELEVEUR");
+          }
+          else if(res.role == "LABORANTIN"){
+            link = this.linkLaboratoire;
+            console.log("LABORANTIN");
+          }
+          else if(res.role == "PATIENT"){
+            link = this.linkPatient;
+            console.log("PATIENT");
+          }
+          else {
+            link = this.linkAdmin;
+            console.log("ADMIN");
+          }
+
           localStorage.setItem('userConnect', JSON.stringify(response));
           localStorage.setItem('conected', 'true');
           localStorage.setItem('token', response.authenticationToken);
           localStorage.setItem('expireAt', response.expiresAt);
-          this.message = "";
-          this.router.navigate(['/dashboard']);
+          localStorage.setItem("link", JSON.stringify(link));
 
         }
         else {

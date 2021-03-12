@@ -42,8 +42,8 @@ export class ControleurComponent implements OnInit {
     this.form = this.formBuilder.group({
       id : [''],
       birthday: ['', Validators.required],
-      email: ['', Validators.required],
-      imageSelfie: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+[a-zA-Z0-9._-]*[^\.]@{1}[a-z]{2,}\.{1}[a-z]{2,4}$/)]],
+      imageSelfie: [''],
       name: ['', Validators.required],
       phone: ['', Validators.required],
       sexe: ['', Validators.required],
@@ -51,6 +51,10 @@ export class ControleurComponent implements OnInit {
       username: ['', Validators.required],
       typeControleur: ['', Validators.required],
     });
+  }
+
+  public get f() {
+    return this.form.controls;
   }
 
   resetForm(){
@@ -185,7 +189,6 @@ export class ControleurComponent implements OnInit {
       name: this.form.get("name").value,
       phone: this.form.get("phone").value,
       sexe: this.form.get("sexe").value,
-      password: this.form.get("password").value,
       username: this.form.get("username").value,
       typeControleur: this.form.get("typeControleur").value,
       role: "CONTROLEUR",
@@ -247,7 +250,7 @@ export class ControleurComponent implements OnInit {
         name: obj.name,
         phone: obj.phone,
         sexe: obj.sexe,
-        password: "",
+        password: "12345",
         username: obj.user.username,
         typeControleur: obj.typeControleur,
       }

@@ -329,7 +329,6 @@ export class LaboratoireComponent implements OnInit {
         id : this.form.get("city").value
       },
       username : this.form.get("username").value,
-      password : this.form.get("password").value,
       vaccins : vac,
       imageSelfie : imageId,
       typeService : this.service,

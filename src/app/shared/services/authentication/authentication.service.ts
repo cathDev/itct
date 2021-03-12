@@ -45,12 +45,11 @@ export class AuthenticationService {
     return JSON.parse(localStorage.getItem('userConnect'));
   }
 
-  public getPatient(){
-    return this.patient;
-  }
-
-  public setPatient(obj){
-    this.patient = obj;
+  public menuRole(url): boolean {
+    var menuLinkList = localStorage.getItem('link');
+    if(menuLinkList.includes(url)){
+      return true;
+    }
   }
 
 }

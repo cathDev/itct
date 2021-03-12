@@ -144,6 +144,7 @@ export class TestComponent implements OnInit {
           this.spinner.hide();
           this.form.reset();
           resultat = res;
+          this.allAppointment();
           this.toast.success("Opération effectuée avec succès");
           console.log(resultat);
         },
@@ -198,6 +199,5 @@ export class TestComponent implements OnInit {
       })
       .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
-
 
 }

@@ -83,5 +83,21 @@
   "List of appointments" : "Liste des rendez vous",
   "Reason" : "Motif",
   "Time" : "Heure",
-  "Cancel the appointment" : "Annuler le RDV"
+  "Cancel the appointment" : "Annuler le RDV",
+  "Patients" : "Patients",
+  "Tests" : "Tests",
+  "Tasks" : "Tâches",
+  "Information on patient anonymity" : "Informations sur l’anonymat du patient",
+  "Anonymity number" : "N° anonymat",
+  "Sample taken" : "Prélèvement effectué",
+  "Send" : "Envoyer",
+  "Patient data" : "Données du patient",
+  "Passport number" : "Numéro du passeport",
+  "Passport picture" : "Image du passeport",
+  "Vaccine information" : "Informations du vaccin",
+  "Select vaccines" : "Sélectionner les vaccins",
+  "Vaccines performed on the patient" : "Vaccins effectués sur le patient",
+  "Check" : "Vérifier",
+  "Test Information" : "Informations du test",
+  "Observations" : "Observations"
 }

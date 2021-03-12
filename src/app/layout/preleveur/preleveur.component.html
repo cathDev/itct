@@ -33,47 +33,66 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group form-focus">
-                            <label class="focus-label" translate>Full Name</label>
+                            <label class="focus-label" translate>Full Name <span style="font-weight: bold; color: red;">*</span></label>
                             <input type="text" class="form-control floating" value="" formControlName="name">
+                          </div>
+                          <div *ngIf="f.name.invalid && f.name.touched" class="text-danger">
+                            <small *ngIf="f.name.errors.required">Le nom est requis.</small>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group form-focus">
-                            <label class="focus-label" translate>Date of Birth</label>
+                            <label class="focus-label" translate>Date of Birth <span style="font-weight: bold; color: red;">*</span></label>
                             <input type="text" class="form-control floating" value="" formControlName="birthday" onfocus="(this.type='date')">
+                          </div>
+                          <div *ngIf="f.birthday.invalid && f.birthday.touched" class="text-danger">
+                            <small *ngIf="f.birthday.errors.required">La date de naissance est requise.</small>
                           </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group form-focus">
-                            <label class="focus-label" translate>Sex</label>
+                            <label class="focus-label" translate>Sex <span style="font-weight: bold; color: red;">*</span></label>
                             <select class="form-control floating" formControlName="sexe">
                               <option value="Masculin" translate>Masculin</option>
                               <option value="Feminin" translate>Feminine</option>
                             </select>
                           </div>
+                          <div *ngIf="f.sexe.invalid && f.sexe.touched" class="text-danger">
+                            <small *ngIf="f.sexe.errors.required">Le sexe est requis.</small>
+                          </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group form-focus">
-                            <label class="focus-label" translate>Phone</label>
+                            <label class="focus-label" translate>Phone <span style="font-weight: bold; color: red;">*</span></label>
                             <input type="text" class="form-control floating" value="" formControlName="phone">
-                           </div>
+                          </div>
+                          <div *ngIf="f.phone.invalid && f.phone.touched" class="text-danger">
+                            <small *ngIf="f.phone.errors.required">Le numéro de téléphone est requis.</small>
+                          </div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group form-focus">
-                            <label class="focus-label" translate>E-mail adress</label>
+                            <label class="focus-label" translate>E-mail adress <span style="font-weight: bold; color: red;">*</span></label>
                             <input type="text" class="form-control floating" value="" formControlName="email">
+                          </div>
+                          <div *ngIf="f.email.invalid && f.email.touched" class="text-danger">
+                            <small *ngIf="f.email.errors?.pattern">Le format d'email est incorrect.</small>
+                            <small *ngIf="f.email.errors.required">L'adresse email est requis.</small>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group form-focus select-focus">
-                            <label class="focus-label" translate>Approved center</label>
+                            <label class="focus-label" translate>Approved center <span style="font-weight: bold; color: red;">*</span></label>
                             <select class="form-control floating" formControlName="laboratoire">
                               <option [ngValue]=labo.id *ngFor="let labo of laboratoires">{{labo.name}}</option>
                             </select>
+                          </div>
+                          <div *ngIf="f.laboratoire.invalid && f.laboratoire.touched" class="text-danger">
+                            <small *ngIf="f.laboratoire.errors.required">Le centre agrée est requis.</small>
                           </div>
                         </div>
 
@@ -81,17 +100,23 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group form-focus">
-                            <label class="focus-label" translate>Username</label>
+                            <label class="focus-label" translate>Username <span style="font-weight: bold; color: red;">*</span></label>
                             <input type="text" class="form-control floating" value="" formControlName="username">
+                          </div>
+                          <div *ngIf="f.username.invalid && f.username.touched" class="text-danger">
+                            <small *ngIf="f.username.errors.required">Le nom d'utilisateur est requis.</small>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group form-focus">
-                            <label class="focus-label" translate>Password</label>
+                            <label class="focus-label" translate>Password <span style="font-weight: bold; color: red;">*</span></label>
                             <input type="password" class="form-control floating" value="" style="position: relative;" formControlName="password">
                             <!--<span class="p-viewer">
                               <i class="fa fa-eye" aria-hidden="true"></i>
                             </span>-->
+                          </div>
+                          <div *ngIf="f.password.invalid && f.password.touched" class="text-danger">
+                            <small *ngIf="f.password.errors.required">Le mot de passe est requis.</small>
                           </div>
                         </div>
                       </div>
@@ -136,47 +161,66 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group form-focus">
-                              <label class="focus-label" translate>Full Name</label>
+                              <label class="focus-label" translate>Full Name <span style="font-weight: bold; color: red;">*</span></label>
                               <input type="text" class="form-control floating" value="" formControlName="name">
+                            </div>
+                            <div *ngIf="f.name.invalid && f.name.touched" class="text-danger">
+                              <small *ngIf="f.name.errors.required">Le nom est requis.</small>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-focus">
-                              <label class="focus-label" translate>Date of Birth</label>
+                              <label class="focus-label" translate>Date of Birth <span style="font-weight: bold; color: red;">*</span></label>
                               <input type="text" class="form-control floating" value="" formControlName="birthday" onfocus="(this.type='date')">
+                            </div>
+                            <div *ngIf="f.birthday.invalid && f.birthday.touched" class="text-danger">
+                              <small *ngIf="f.birthday.errors.required">La date de naissance est requise.</small>
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group form-focus">
-                              <label class="focus-label" translate>Sex</label>
+                              <label class="focus-label" translate>Sex <span style="font-weight: bold; color: red;">*</span></label>
                               <select class="form-control floating" formControlName="sexe">
-                                <option value="Masculin" translate>Male</option>
+                                <option value="Masculin" translate>Masculin</option>
                                 <option value="Feminin" translate>Feminine</option>
                               </select>
                             </div>
+                            <div *ngIf="f.sexe.invalid && f.sexe.touched" class="text-danger">
+                              <small *ngIf="f.sexe.errors.required">Le sexe est requis.</small>
+                            </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-focus">
-                              <label class="focus-label" translate>Phone</label>
+                              <label class="focus-label" translate>Phone <span style="font-weight: bold; color: red;">*</span></label>
                               <input type="text" class="form-control floating" value="" formControlName="phone">
+                            </div>
+                            <div *ngIf="f.phone.invalid && f.phone.touched" class="text-danger">
+                              <small *ngIf="f.phone.errors.required">Le numéro de téléphone est requis.</small>
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group form-focus">
-                              <label class="focus-label" translate>E-mail adress</label>
+                              <label class="focus-label" translate>E-mail adress <span style="font-weight: bold; color: red;">*</span></label>
                               <input type="text" class="form-control floating" value="" formControlName="email">
+                            </div>
+                            <div *ngIf="f.email.invalid && f.email.touched" class="text-danger">
+                              <small *ngIf="f.email.errors?.pattern">Le format d'email est incorrect.</small>
+                              <small *ngIf="f.email.errors.required">L'adresse email est requis.</small>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="form-group form-focus select-focus">
-                              <label class="focus-label" translate>Approved center</label>
+                              <label class="focus-label" translate>Approved center <span style="font-weight: bold; color: red;">*</span></label>
                               <select class="form-control floating" formControlName="laboratoire">
                                 <option [ngValue]=labo.id *ngFor="let labo of laboratoires">{{labo.name}}</option>
                               </select>
+                            </div>
+                            <div *ngIf="f.laboratoire.invalid && f.laboratoire.touched" class="text-danger">
+                              <small *ngIf="f.laboratoire.errors.required">Le centre agrée est requis.</small>
                             </div>
                           </div>
 
@@ -184,17 +228,23 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group form-focus">
-                              <label class="focus-label" translate>Username</label>
+                              <label class="focus-label" translate>Username <span style="font-weight: bold; color: red;">*</span></label>
                               <input type="text" class="form-control floating" value="" formControlName="username">
+                            </div>
+                            <div *ngIf="f.username.invalid && f.username.touched" class="text-danger">
+                              <small *ngIf="f.username.errors.required">Le nom d'utilisateur est requis.</small>
                             </div>
                           </div>
                           <!--<div class="col-md-6">
                             <div class="form-group form-focus">
-                              <label class="focus-label" translate>Password</label>
+                              <label class="focus-label" translate>Password <span style="font-weight: bold; color: red;">*</span></label>
                               <input type="password" class="form-control floating" value="" style="position: relative;" formControlName="password">
                               &lt;!&ndash;<span class="p-viewer">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                               </span>&ndash;&gt;
+                            </div>
+                            <div *ngIf="f.password.invalid && f.password.touched" class="text-danger">
+                              <small *ngIf="f.password.errors.required">Le mot de passe est requis.</small>
                             </div>
                           </div>-->
                         </div>

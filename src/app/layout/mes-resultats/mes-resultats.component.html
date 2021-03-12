@@ -36,10 +36,10 @@
                   <td *ngIf="test.objetAppointment.label == 'TEST COVID'">{{test.commentaire}}</td>
                   <td *ngIf="test.objetAppointment.label == 'TEST COVID'">
                     <span *ngIf="test.testIGG == true" translate>Positive</span>
-                    <span *ngIf="test.testIGG == false">Négatif</span>
+                    <span *ngIf="test.testIGG == false" translate>Negative</span>
                   </td>
                   <td *ngIf="test.objetAppointment.label == 'TEST COVID'">
-                    <span *ngIf="test.testIGM == true">Positif</span>
+                    <span *ngIf="test.testIGM == true" translate>Positive</span>
                     <span *ngIf="test.testIGM == false" translate>Negative</span>
                   </td>
                 </tr>

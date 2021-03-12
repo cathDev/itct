@@ -7,7 +7,7 @@
           <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
           <div class="dash-widget-info text-right">
             <h3>{{patients.length}}</h3>
-            <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="widget-title2" translate>Patients <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
           <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
           <div class="dash-widget-info text-right">
             <h3>5</h3>
-            <span class="widget-title1">Tests <i class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="widget-title1" translate>Tests <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
           <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
           <div class="dash-widget-info text-right">
             <h3>{{rdv.length}}</h3>
-            <span class="widget-title3">Tâches <i class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="widget-title3" translate>Tasks <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
@@ -43,10 +43,10 @@
     <div class="row">
       <div class="col-md-6">
         <div class="card-box shadow-sm p-3 mb-5 bg-white rounded">
-          <h4 class="card-title">Informations sur l’anonymat du patient</h4>
+          <h4 class="card-title" translate>Information on patient anonymity</h4>
           <div class="form">
             <div class="form-group row">
-              <label class="col-md-3 col-form-label">N° anonymat</label>
+              <label class="col-md-3 col-form-label" translate>Anonymity number</label>
               <div class="col-md-9">
                 <input type="text" class="form-control rounded" value="{{patient.identifiant}}" readonly>
               </div>
@@ -54,14 +54,14 @@
             <div class="text-left">
               <div class="col-md-10">
                 <div class="checkbox">
-                  <label>
-                    <input type="checkbox" name="checkbox" class="rounded" value="true" [(ngModel)]="soins"> Prélèvement effectué
+                  <label translate>
+                    <input type="checkbox" name="checkbox" class="rounded" value="true" [(ngModel)]="soins"> Sample taken
                   </label>
                 </div>
               </div>
             </div>
             <div class="text-right">
-              <button type="submit" class="btn btn-primary-one" (click)="saveTest()" [disabled]="((patient | json) == '{}') || soins == false">Envoyer</button>
+              <button type="submit" class="btn btn-primary-one" (click)="saveTest()" [disabled]="((patient | json) == '{}') || soins == false" translate>Send</button>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@
         <div class="card-box shadow-sm p-3 mb-5 bg-white rounded">
           <div class="row">
             <div class="col-md-8">
-              <h4 class="card-title">Données du patient</h4>
+              <h4 class="card-title" translate>Patient data</h4>
             </div>
             <div class="col-md-4">
               <div class="account-logo">
@@ -84,33 +84,33 @@
           <form action="#">
             <div class="form-group row">
               <div class="col-md-12">
-                <input type="text" class="form-control rounded" value="{{patient.name}}" placeholder="Nom complet" readonly>
+                <input type="text" class="form-control rounded" value="{{patient.name}}" placeholder="{{fullName | translate }}" readonly>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-md-6">
-                <input type="text" class="form-control rounded" value="{{patient.sexe}}" placeholder="Sexe" readonly>
+                <input type="text" class="form-control rounded" value="{{patient.sexe}}" placeholder="{{sexe | translate}}" readonly>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control rounded" value="{{birthday}}" placeholder="Date de Naissance" readonly>
+                <input type="text" class="form-control rounded" value="{{birthday}}" placeholder="{{birth | translate}}" readonly>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-md-6">
-                <input type="text" class="form-control rounded" value="{{patient.phone}}" placeholder="Téléphone" readonly>
+                <input type="text" class="form-control rounded" value="{{patient.phone}}" placeholder="{{tel | translate}}" readonly>
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control rounded" value="{{patient.email}}" placeholder="Email" readonly>
+                <input type="text" class="form-control rounded" value="{{patient.email}}" placeholder="{{mail | translate}}" readonly>
               </div>
             </div>
             <div class="row">
               <div class="form-group col-md-6">
-                <input type="text" class="form-control rounded" value="{{patient.numeroPassport}}" placeholder="Numéro du passeport" readonly>
+                <input type="text" class="form-control rounded" value="{{patient.numeroPassport}}" placeholder="{{passNum | translate}}" readonly>
               </div>
               <a class="chat-img-attach" >
                 <img width="182" height="137" alt="image du passeport" src="assets/img/passeport.jpg">
                 <div class="chat-placeholder">
-                  <div class="chat-img-name">image du passeport</div>
+                  <div class="chat-img-name" translate>Passport picture</div>
                   <!--<div class="chat-file-desc">842 KB</div>-->
                 </div>
               </a>

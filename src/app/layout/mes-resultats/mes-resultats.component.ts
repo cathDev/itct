@@ -34,7 +34,7 @@ export class MesResultatsComponent implements OnInit {
 
   ngOnInit() {
     this. userConnected = this.authenticationService.getUserInLocalStorage();
-    this.patient = this.userConnected.patient;
+    this.patient = this.userConnected.user;
     /*this.allTest();
     this.allVaccin();*/
     this.allAppointments();
@@ -63,9 +63,16 @@ export class MesResultatsComponent implements OnInit {
   }
 
   public allAppointments(){
+    var result;
     this.resourceService.getResources("/client/appointment/patient")
       .subscribe(res => {
-          this.appointments = res;
+          result = res;
+            result.forEach(item => {
+              if(item.done == true){
+                this.appointments.push(item);
+              }
+            });
+          /*this.appointments = res;*/
           console.log(this.appointments);
         },
         error => {

@@ -14,6 +14,8 @@ import {MesResultatsComponent} from './mes-resultats/mes-resultats.component';
 import {ValidationTestComponent} from './validation-test/validation-test.component';
 import {PreleveurComponent} from './preleveur/preleveur.component';
 import {ControleurComponent} from './controleur/controleur.component';
+import {AuthGuardService} from '../shared/guard/auth-guard.service';
+import {LinkGuardService} from '../shared/guard/link-guard.service';
 
 const routes: Routes = [
   {
@@ -21,17 +23,107 @@ const routes: Routes = [
     children: [
       {path: '', component: DashboardComponent},
       {path: 'dashboard', component: DashboardComponent},
-      {path: 'appointments', component: AppointmentsComponent},
+      {
+        path: 'appointments',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'appointments'
+        },
+        children: [
+          { path:'', component: AppointmentsComponent }
+        ]
+      },
       {path: 'doctors', component: DoctorComponent},
-      {path: 'patients', component: PatientsComponent},
-      {path: 'laboratoires', component: LaboratoireComponent},
-      {path: 'resultat-test', component: ResultatTestComponent},
-      {path: 'prendre-rendez-vous', component: TestComponent},
-      {path: 'resultat-vaccin', component: ResultatVaccinComponent},
-      {path: 'mes-resultat', component: MesResultatsComponent},
-      {path: 'valider-test', component: ValidationTestComponent},
-      {path: 'preleveur', component: PreleveurComponent},
-      {path: 'controleur', component: ControleurComponent},
+      {
+        path: 'patients',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'patients'
+        },
+        children: [
+          { path:'', component: PatientsComponent }
+        ]
+      },
+      {
+        path: 'laboratoires',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'laboratoires'
+        },
+        children: [
+          { path:'', component: LaboratoireComponent }
+        ]
+      },
+      {
+        path: 'resultat-test',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'resultat-test'
+        },
+        children: [
+          { path:'', component: ResultatTestComponent }
+        ]
+      },
+      {
+        path: 'prendre-rendez-vous',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'prendre-rendez-vous'
+        },
+        children: [
+          { path:'', component: TestComponent }
+        ]
+      },
+      {
+        path: 'resultat-vaccin',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'resultat-vaccin'
+        },
+        children: [
+          { path:'', component: ResultatVaccinComponent }
+        ]
+      },
+      {
+        path: 'mes-resultat',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'mes-resultat'
+        },
+        children: [
+          { path:'', component: MesResultatsComponent }
+        ]
+      },
+      {
+        path: 'valider-test',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'valider-test'
+        },
+        children: [
+          { path:'', component: ValidationTestComponent }
+        ]
+      },
+      {
+        path: 'preleveur',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'preleveur'
+        },
+        children: [
+          { path:'', component: PreleveurComponent }
+        ]
+      },
+      {
+        path: 'controleur',
+        canActivateChild: [LinkGuardService],
+        data: {
+          url: 'controleur'
+        },
+        children: [
+          { path:'', component: ControleurComponent }
+        ]
+      },
     ]
   },
 ];

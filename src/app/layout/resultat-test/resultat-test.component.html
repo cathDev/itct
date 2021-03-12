@@ -7,7 +7,7 @@
           <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
           <div class="dash-widget-info text-right">
             <h3>{{patients.length}}</h3>
-            <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="widget-title2" translate>Patients <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
@@ -16,7 +16,7 @@
           <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
           <div class="dash-widget-info text-right">
             <h3>5</h3>
-            <span class="widget-title1">Tests <i class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="widget-title1" translate>Tests <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
           <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
           <div class="dash-widget-info text-right">
             <h3>{{rdv.length}}</h3>
-            <span class="widget-title3">Tâches <i class="fa fa-check" aria-hidden="true"></i></span>
+            <span class="widget-title3" translate>Tasks <i class="fa fa-check" aria-hidden="true"></i></span>
           </div>
         </div>
       </div>
@@ -46,10 +46,10 @@
           <ngx-spinner [fullScreen]="false" type="pacman" color="#96ab5c" size="medium">
             <p class="loading" style="font-size: 20px; color: #96ab5c; margin-top: 30px;" translate>Please wait</p>
           </ngx-spinner>
-          <h4 class="card-title">Informations du test</h4>
+          <h4 class="card-title" translate>Test Information</h4>
           <form [formGroup]="form" (ngSubmit)="saveTest()">
             <div class="form-group row">
-              <label class="col-md-3 col-form-label">N° anonymat</label>
+              <label class="col-md-3 col-form-label" translate>Anonymity number</label>
               <div class="col-md-9">
                 <input type="text" class="form-control rounded" value="{{patient.identifiant}}" readonly>
               </div>
@@ -59,15 +59,15 @@
               <div class="col-md-9 row" style="margin-top: 6px;">
                 <div class="col-md-4">
                   <div class="radio">
-                    <label>
-                      <input type="radio" formControlName="igg" value="true"> Positif
+                    <label translate>
+                      <input type="radio" formControlName="igg" value="true" > Positive
                     </label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="radio">
-                    <label>
-                      <input type="radio" formControlName="igg" value="false"> Négatif
+                    <label translate>
+                      <input type="radio" formControlName="igg" value="false" > Negative
                     </label>
                   </div>
                 </div>
@@ -78,22 +78,22 @@
               <div class="col-md-9 row" style="margin-top: 6px;">
                 <div class="col-md-4">
                   <div class="radio">
-                    <label>
-                      <input type="radio" formControlName="igm" value="true"> Positif
+                    <label translate>
+                      <input type="radio" formControlName="igm" value="true" > Positive
                     </label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="radio">
-                    <label>
-                      <input type="radio" formControlName="igm" value="false"> Négatif
+                    <label translate>
+                      <input type="radio" formControlName="igm" value="false" > Negative
                     </label>
                   </div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 col-form-label">Observations</label>
+              <label class="col-md-3 col-form-label" translate>Observations</label>
               <div class="col-lg-9">
                 <textarea rows="3" cols="5" class="form-control rounded" formControlName="testCommentaire" value="true"></textarea>
               </div>
@@ -102,13 +102,13 @@
               <div class="col-md-10">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" name="checkbox" class="rounded"> Vérifier
+                    <input type="checkbox" name="checkbox" class="rounded" translate> Check
                   </label>
                 </div>
               </div>
             </div>
             <div class="text-right">
-              <button type="submit" class="btn btn-primary-one" [disabled]="((patient | json) == '{}')">Envoyer</button>
+              <button type="submit" class="btn btn-primary-one" [disabled]="((patient | json) == '{}')" translate>Send</button>
             </div>
           </form>
         </div>

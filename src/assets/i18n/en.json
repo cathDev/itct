@@ -83,5 +83,21 @@
   "List of appointments" : "List of appointments",
   "Reason" : "Reason",
   "Time" : "Time",
-  "Cancel the appointment" : "Cancel the appointment"
+  "Cancel the appointment" : "Cancel the appointment",
+  "Patients" : "Patients",
+  "Tests" : "Tests",
+  "Tasks" : "Tasks",
+  "Information on patient anonymity" : "Information on patient anonymity",
+  "Anonymity number" : "Anonymity number",
+  "Sample taken" : "Sample taken",
+  "Send" : "Send",
+  "Patient data" : "Patient data",
+  "Passport number" : "Passport number",
+  "Passport picture" : "Passport picture",
+  "Vaccine information" : "Vaccine information",
+  "Select vaccines" : "Select vaccines",
+  "Vaccines performed on the patient" : "Vaccines performed on the patient",
+  "Check" : "Check",
+  "Test Information" : "Test Information",
+  "Observations" : "Observations"
 }

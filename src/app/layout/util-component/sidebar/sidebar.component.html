@@ -16,10 +16,10 @@
           <a routerLink="/appointments" routerLinkActive="is-active"><i class="fa fa-calendar"></i> <span translate>Appointment</span></a>
         </li>
         <li *ngIf="user.role == 'PATIENT'">
-          <a routerLink="/prendre-rendez-vous" routerLinkActive="is-active"><i class="fa fa-calendar"></i> <span translate>Make an appointment</span></a>
+          <a routerLink="/mes-resultat" routerLinkActive="is-active"><i class="fa fa-book-medical"></i> <span translate>My results</span></a>
         </li>
         <li *ngIf="user.role == 'PATIENT'">
-          <a routerLink="/mes-resultat" routerLinkActive="is-active"><i class="fa fa-book-medical"></i> <span translate>My results</span></a>
+          <a routerLink="/prendre-rendez-vous" routerLinkActive="is-active"><i class="fa fa-calendar"></i> <span translate>Make an appointment</span></a>
         </li>
         <!--<li *ngIf="user.role == 'LABORANTIN'">
           <a routerLink="/resultat-test" routerLinkActive="is-active"><i class="fa fa-calendar"></i> <span translate>Covid19 test result</span></a>
